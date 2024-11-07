@@ -23,11 +23,13 @@ class Profile(models.Model):
     hard_skills = models.ManyToManyField("HardSkill", blank=True)  # Habilidades duras
     soft_skills = models.ManyToManyField("SoftSkill", blank=True)  # Habilidades blandas
     idiomas = models.ManyToManyField("Idioma", blank=True)  # Idiomas
-    voluntariados = models.ManyToManyField("Voluntariado", blank=True)  # Voluntariados
-    proyectos = models.ManyToManyField("Proyecto", blank=True)  # Proyectos
-    publicaciones = models.ManyToManyField("Publicacion", blank=True)  # Publicaciones
-    reconocimientos_premios = models.ManyToManyField("ReconocimientoPremio", blank=True)  # Reconocimientos y premios
-    certificaciones_cursos = models.ManyToManyField("CertificacionCurso", blank=True)  # Certificaciones y cursos
+
+    # Relaciones uno a muchos con otros modelos
+    voluntariados = models.ForeignKey("Voluntariado", on_delete=models.CASCADE, blank=True, null=True)  # Voluntariados
+    proyectos = models.ForeignKey("Proyecto", on_delete=models.CASCADE, blank=True, null=True)  # Proyectos
+    publicaciones = models.ForeignKey("Publicacion", on_delete=models.CASCADE, blank=True, null=True)  # Publicaciones
+    reconocimientos_premios = models.ForeignKey("ReconocimientoPremio", on_delete=models.CASCADE, blank=True, null=True)  # Reconocimientos y premios
+    certificaciones_cursos = models.ForeignKey("CertificacionCurso", on_delete=models.CASCADE, blank=True, null=True)  # Certificaciones y cursos
 
 # Modelo para representar una experiencia laboral
 class ExperienciaLaboral(models.Model):
