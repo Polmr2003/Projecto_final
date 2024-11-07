@@ -19,12 +19,12 @@ class Profile(models.Model):
 
     # Relaciones muchos a muchos con otros modelos
     experiencias_laborales = models.ManyToManyField("ExperienciaLaboral", blank=True)  # Experiencias laborales
-    formaciones_academicas = models.ManyToManyField("FormacionAcademica", blank=True)  # Formaciones académicas
     hard_skills = models.ManyToManyField("HardSkill", blank=True)  # Habilidades duras
     soft_skills = models.ManyToManyField("SoftSkill", blank=True)  # Habilidades blandas
     idiomas = models.ManyToManyField("Idioma", blank=True)  # Idiomas
 
     # Relaciones uno a muchos con otros modelos
+    formaciones_academicas = models.ForeignKey("FormacionAcademica")  # Formaciones académicas
     voluntariados = models.ForeignKey("Voluntariado", on_delete=models.CASCADE, blank=True, null=True)  # Voluntariados
     proyectos = models.ForeignKey("Proyecto", on_delete=models.CASCADE, blank=True, null=True)  # Proyectos
     publicaciones = models.ForeignKey("Publicacion", on_delete=models.CASCADE, blank=True, null=True)  # Publicaciones
