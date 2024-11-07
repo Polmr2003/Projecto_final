@@ -24,7 +24,7 @@ class Profile(models.Model):
     idiomas = models.ManyToManyField("Idioma", blank=True)  # Idiomas
 
     # Relaciones uno a muchos con otros modelos
-    formaciones_academicas = models.ForeignKey("FormacionAcademica")  # Formaciones académicas
+    formaciones_academicas = models.ForeignKey("FormacionAcademica", on_delete=models.CASCADE)  # Formaciones académicas
     voluntariados = models.ForeignKey("Voluntariado", on_delete=models.CASCADE, blank=True, null=True)  # Voluntariados
     proyectos = models.ForeignKey("Proyecto", on_delete=models.CASCADE, blank=True, null=True)  # Proyectos
     publicaciones = models.ForeignKey("Publicacion", on_delete=models.CASCADE, blank=True, null=True)  # Publicaciones
