@@ -1,5 +1,16 @@
 from django.db import models
 
+# Enums
+class Incorporacion(models.TextChoices):
+    INMEDIATAMENTE = 'INMEDIATAMENTE', 'Inmediatamente'
+    _15_DIAS = '_15_DIAS', '_15_Dias'
+    _7_DIAS = '_7_DIAS', '_7_Dias'
+
+class Sector(models.TextChoices):
+    IT = 'IT', 'It'
+    SALUT = 'SALUT', 'Salut'
+    OTRO = 'OTRO', 'Otro'
+
 # Modelo para representar un usuario
 class User(models.Model):
     username = models.CharField(max_length=150, unique=True)  # Nombre de usuario único
@@ -20,6 +31,9 @@ class Profile(models.Model):
     vehicle = models.BooleanField(blank=False, null= True)
     disability =  models.BooleanField(blank=False)
     disability_percentage = models.IntegerField(blank= True, null= True)
+    incorporation = models.CharField(max_length=50, choices=Incorporacion.choices)  # Incorporación
+    sector = models.CharField(max_length=50, choices=Sector.choices)  # Sector
+
 
     # Relaciones muchos a muchos con otros modelos
     experiencias_laborales = models.ManyToManyField("ExperienciaLaboral", blank=True)  # Experiencias laborales
