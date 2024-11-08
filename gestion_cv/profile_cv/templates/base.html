@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Police Management System{% endblock %}</title>
+    <title>{% block title %}Management System{% endblock %}</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- <a class="navbar-brand" href="{% url 'police_officer_list' %}">Police Management</a> -->
-        <a class="navbar-brand" href="/">Police Management</a>
+        <a class="navbar-brand" href="/">Management</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="{% url 'police_officer_list' %}">Police Officers</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'criminal_list' %}">Criminals</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'crime_list' %}">Crimes</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'report_list' %}">Reports</a></li>
             </ul>
         </div>
     </nav>

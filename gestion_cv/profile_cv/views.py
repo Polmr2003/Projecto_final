@@ -27,7 +27,7 @@ def create_user(request):
     return render(request, 'user_form.html', {'form': form})
 
 #? Función para listar los usuarios
-def user_list(request):
+def list_user(request):
     users = User.objects.all()
     return render(request, 'user_list.html', {'users': users})
 
@@ -50,3 +50,49 @@ def delete_user(request, user_id):
         user.delete()
         return redirect('user_list')
     return render(request, 'user_confirm_delete.html', {'user': user})
+
+#* |--------------------------------------------------------------------------
+#* | Class Profile
+#* |--------------------------------------------------------------------------
+
+#? Clase user form
+class ProfileForm(forms.ModelForm):
+        class Meta:
+            model = Profile
+            fields = ['user', 'direccion', 'telefono', 'correo_electronico_1', 'correo_electronico_2', 'dni', 'url', 'biografia', 'open_to_work', 'vehicle', 'disability', 'disability_percentage', 'incorporation', 'sector', 'experiencias_laborales', 'hard_skills', 'soft_skills', 'idiomas', 'formaciones_academicas', 'voluntariados', 'proyectos', 'publicaciones', 'reconocimientos_premios', 'certificaciones_cursos']
+
+#? Función para crear un usuario
+def create_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_list')
+    else:
+        form = ProfileForm()
+    return render(request, 'profile_form.html', {'form': form})
+
+#? Función para listar los usuarios
+def list_profile(request):
+    profile = Profile.objects.all()
+    return render(request, 'profile_list.html', {'profiles': profile})
+
+#? Función para actualizar un usuario
+def update_profile(request, profile_id):
+    profile = get_object_or_404(Profile, id=profile_id)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_list')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'profile_form.html', {'form': form})
+
+#? Función para eliminar un usuario
+def delete_user(request, profile_id):
+    profile = get_object_or_404(Profile, id=profile_id)
+    if request.method == 'POST':
+        profile.delete()
+        return redirect('profile_list')
+    return render(request, 'profile_confirm_delete.html', {'profiles': profile})
