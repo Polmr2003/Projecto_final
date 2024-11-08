@@ -121,4 +121,4 @@ class CertificacionCurso(models.Model):
     nombre_academia = models.CharField(max_length=255)  # Nombre de la academia
     fecha_inicio = models.DateField()  # Fecha de inicio
     fecha_fin = models.DateField(blank=True, null=True)  # Fecha de finalización opcional
-    current_course = models.BooleanField(blank=False)  # Curso actual
+    current_course = models.BooleanField(blank=False)  # Curso actua
