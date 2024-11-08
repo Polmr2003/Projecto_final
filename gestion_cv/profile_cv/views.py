@@ -1,12 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
-from django import forms
 from .forms import *
 
 # * |--------------------------------------------------------------------------
 # * | User Name
 # * |--------------------------------------------------------------------------
-
 
 # ? Función para crear un usuario
 def user_create(request):
@@ -48,7 +46,6 @@ def user_delete(request, user_id):
 # * | Class Profile
 # * |--------------------------------------------------------------------------
 
-
 # ? Función para crear un perfil
 def profile_create(request):
     if request.method == "POST":
@@ -85,39 +82,82 @@ def profile_delete(request, profile_id):
         return redirect("profile_list")
     return render(request, "profile_confirm_delete.html", {"profile": profile})
 
-# Función para listar las HardSkills
-def hardskill_list(request):
-    hardskills = HardSkill.objects.all()
-    return render(request, "hardskill_list.html", {"hardskills": hardskills})
+# * |--------------------------------------------------------------------------
+# * | Class WorkExperience
+# * |--------------------------------------------------------------------------
 
-# Función para crear una HardSkill
-def hardskill_create(request):
+# ? Función para crear una experiencia laboral
+def work_experience_create(request):
     if request.method == "POST":
-        form = HardSkillForm(request.POST)
+        form = WorkExperienceForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("hardskill_list")
+            return redirect("work_experience_list")
     else:
-        form = HardSkillForm()
-    return render(request, "hardskill_form.html", {"form": form})
+        form = WorkExperienceForm()
+    return render(request, "work_experience_form.html", {"form": form})
 
+# ? Función para listar las experiencias laborales
+def work_experience_list(request):
+    work_experiences = WorkExperience.objects.all()
+    return render(request, "work_experience_list.html", {"work_experiences": work_experiences})
 
-# Función para actualizar una HardSkill
-def hardskill_update(request, hardskill_id):
-    hardskill = get_object_or_404(HardSkill, id=hardskill_id)
+# ? Función para actualizar una experiencia laboral
+def work_experience_update(request, work_experience_id):
+    work_experience = get_object_or_404(WorkExperience, id=work_experience_id)
     if request.method == "POST":
-        form = HardSkillForm(request.POST, instance=hardskill)
+        form = WorkExperienceForm(request.POST, instance=work_experience)
         if form.is_valid():
             form.save()
-            return redirect("hardskill_list")
+            return redirect("work_experience_list")
     else:
-        form = HardSkillForm(instance=hardskill)
-    return render(request, "hardskill_form.html", {"form": form})
+        form = WorkExperienceForm(instance=work_experience)
+    return render(request, "work_experience_form.html", {"form": form})
 
-# Función para eliminar una HardSkill
-def hardskill_delete(request, hardskill_id):
-    hardskill = get_object_or_404(HardSkill, id=hardskill_id)
+# ? Función para eliminar una experiencia laboral
+def work_experience_delete(request, work_experience_id):
+    work_experience = get_object_or_404(WorkExperience, id=work_experience_id)
     if request.method == "POST":
-        hardskill.delete()
-        return redirect("hardskill_list")
-    return render(request, "hardskill_confirm_delete.html", {"hardskill": hardskill})
+        work_experience.delete()
+        return redirect("work_experience_list")
+    return render(request, "work_experience_confirm_delete.html", {"work_experience": work_experience})
+
+# * |--------------------------------------------------------------------------
+# * | Class AcademicEducation
+# * |--------------------------------------------------------------------------
+
+# ? Función para crear una educación académica
+def academic_education_create(request):
+    if request.method == "POST":
+        form = AcademicEducationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("academic_education_list")
+    else:
+        form = AcademicEducationForm()
+    return render(request, "academic_education_form.html", {"form": form})
+
+# ? Función para listar las educaciones académicas
+def academic_education_list(request):
+    academic_educations = AcademicEducation.objects.all()
+    return render(request, "academic_education_list.html", {"academic_educations": academic_educations})
+
+# ? Función para actualizar una educación académica
+def academic_education_update(request, academic_education_id):
+    academic_education = get_object_or_404(AcademicEducation, id=academic_education_id)
+    if request.method == "POST":
+        form = AcademicEducationForm(request.POST, instance=academic_education)
+        if form.is_valid():
+            form.save()
+            return redirect("academic_education_list")
+    else:
+        form = AcademicEducationForm(instance=academic_education)
+    return render(request, "academic_education_form.html", {"form": form})
+
+# ? Función para eliminar una educación académica
+def academic_education_delete(request, academic_education_id):
+    academic_education = get_object_or_404(AcademicEducation, id=academic_education_id)
+    if request.method == "POST":
+        academic_education.delete()
+        return redirect("academic_education_list")
+    return render(request, "academic_education_confirm_delete.html", {"academic_education": academic_education})
