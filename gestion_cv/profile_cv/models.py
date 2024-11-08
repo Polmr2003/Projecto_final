@@ -30,7 +30,8 @@ class Profile(models.Model):
     open_to_work = models.BooleanField(blank=True, null=True) 
     vehicle = models.BooleanField(blank=False, null= True)
     disability =  models.BooleanField(blank=True, null=True)
-    disability_percentage = models.IntegerField(blank= True, null= True)
+    disability_percentage = models.IntegerField(
+        blank= True, null= True)
     incorporation = models.CharField(max_length=50, choices=Incorporacion.choices, blank=True, null=True)  # Incorporación
     sector = models.CharField(max_length=50, choices=Sector.choices, blank=True, null=True)  # Sector
 
