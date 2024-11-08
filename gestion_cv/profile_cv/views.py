@@ -1,16 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from django import forms
+from .forms import *
 
 # * |--------------------------------------------------------------------------
 # * | User Name
 # * |--------------------------------------------------------------------------
 
-# ? Clase user form
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ["username", "password", "nombre"]
 
 # ? Función para crear un usuario
 def user_create(request):
@@ -52,36 +48,6 @@ def user_delete(request, user_id):
 # * | Class Profile
 # * |--------------------------------------------------------------------------
 
-# ? Clase profile form
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = [
-            "user",
-            "address",
-            "phone",
-            "email_1",
-            "email_2",
-            "dni",
-            "url",
-            "biography",
-            "open_to_work",
-            "vehicle",
-            "disability",
-            "disability_percentage",
-            "incorporation",
-            "sector",
-            "work_experiences",
-            "hard_skills",
-            "soft_skills",
-            "languages",
-            "academic_educations",
-            "volunteerings",
-            "projects",
-            "publications",
-            "recognitions_awards",
-            "certifications_courses",
-        ]
 
 # ? Función para crear un perfil
 def profile_create(request):
@@ -118,3 +84,40 @@ def profile_delete(request, profile_id):
         profile.delete()
         return redirect("profile_list")
     return render(request, "profile_confirm_delete.html", {"profile": profile})
+
+# Función para listar las HardSkills
+def hardskill_list(request):
+    hardskills = HardSkill.objects.all()
+    return render(request, "hardskill_list.html", {"hardskills": hardskills})
+
+# Función para crear una HardSkill
+def hardskill_create(request):
+    if request.method == "POST":
+        form = HardSkillForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("hardskill_list")
+    else:
+        form = HardSkillForm()
+    return render(request, "hardskill_form.html", {"form": form})
+
+
+# Función para actualizar una HardSkill
+def hardskill_update(request, hardskill_id):
+    hardskill = get_object_or_404(HardSkill, id=hardskill_id)
+    if request.method == "POST":
+        form = HardSkillForm(request.POST, instance=hardskill)
+        if form.is_valid():
+            form.save()
+            return redirect("hardskill_list")
+    else:
+        form = HardSkillForm(instance=hardskill)
+    return render(request, "hardskill_form.html", {"form": form})
+
+# Función para eliminar una HardSkill
+def hardskill_delete(request, hardskill_id):
+    hardskill = get_object_or_404(HardSkill, id=hardskill_id)
+    if request.method == "POST":
+        hardskill.delete()
+        return redirect("hardskill_list")
+    return render(request, "hardskill_confirm_delete.html", {"hardskill": hardskill})
