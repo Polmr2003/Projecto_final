@@ -54,6 +54,7 @@ class ExperienciaLaboral(models.Model):
     puesto_trabajo = models.CharField(max_length=255)  # Puesto de trabajo
     fecha_inicio = models.DateField()  # Fecha de inicio
     fecha_final = models.DateField(blank=True, null=True)  # Fecha de finalización opcional
+    current_job = models.BooleanField(blank=False)  # Trabajo actual
     nombre_empresa = models.CharField(max_length=255)  # Nombre de la empresa
     descripcion = models.TextField(blank=True, null=True)  # Descripción opcional
     logros_obtenidos = models.TextField(blank=True, null=True)  # Logros obtenidos opcionales
@@ -65,6 +66,7 @@ class FormacionAcademica(models.Model):
     nombre_academia = models.CharField(max_length=255)  # Nombre de la academia
     fecha_inicio = models.DateField()  # Fecha de inicio
     fecha_fin = models.DateField(blank=True, null=True)  # Fecha de finalización opcional
+    current_education = models.BooleanField(blank=False)  # Educación actual
     referencias = models.TextField(blank=True, null=True)  # Referencias opcionales
 
 # Modelo para representar una habilidad dura
@@ -88,6 +90,7 @@ class Voluntariado(models.Model):
     puesto_voluntariado = models.CharField(max_length=255)  # Puesto de voluntariado
     fecha_inicio = models.DateField()  # Fecha de inicio
     fecha_final = models.DateField(blank=True, null=True)  # Fecha de finalización opcional
+    current_volunteering = models.BooleanField(blank=False)  # Voluntariado actual
     nombre_entidad = models.CharField(max_length=255)  # Nombre de la entidad
     descripcion = models.TextField(blank=True, null=True)  # Descripción opcional
     logros_obtenidos = models.TextField(blank=True, null=True)  # Logros obtenidos opcionales
@@ -118,3 +121,4 @@ class CertificacionCurso(models.Model):
     nombre_academia = models.CharField(max_length=255)  # Nombre de la academia
     fecha_inicio = models.DateField()  # Fecha de inicio
     fecha_fin = models.DateField(blank=True, null=True)  # Fecha de finalización opcional
+    current_course = models.BooleanField(blank=False)  # Curso actual
