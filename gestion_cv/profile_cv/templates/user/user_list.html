@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}User List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>User list</h2>
+
+    <!-- Lista de crímenes filtrados -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for crime in crimes %}
+            <tr>
+                <td>{{ crime.title }}</td>
+                <td>{{ crime.date|date:"d M Y" }}</td>
+                <td>{{ crime.location }}</td>
+                <td>
+                    <a class="btn btn-info" href="{% url 'crime_detail' crime.pk %}">View</a>
+                    <a class="btn btn-warning" href="{% url 'crime_update' crime.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'crime_delete' crime.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No crimes found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
