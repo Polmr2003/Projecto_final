@@ -158,9 +158,9 @@ def academic_education_update(request, academic_education_id):
 def academic_education_delete(request, academic_education_id):
     academic_education = get_object_or_404(AcademicEducation, id=academic_education_id)
     if request.method == "POST":
-        hardskill.delete()
+        academic_education.delete()
         return redirect("hardskill_list")
-    return render(request, "hardskill_confirm_delete.html", {"hardskill": hardskill})
+    return render(request, "hardskill_confirm_delete.html", {"hardskill": academic_education})
 
 # Función para listar las SoftSkills
 def softskill_list(request):
@@ -351,24 +351,24 @@ def recognitionaward_list(request):
 # Función para crear un reconocimiento o premio
 def recognitionaward_create(request):
     if request.method == "POST":
-        form = RecognitionAwardForm(request.POST)
+        form = RecognitionForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("recognitionaward_list")
     else:
-        form = RecognitionAwardForm()
+        form = RecognitionForm()
     return render(request, "recognitionaward_form.html", {"form": form})
 
 # Función para actualizar un reconocimiento o premio
 def recognitionaward_update(request, recognitionaward_id):
     recognitionaward = get_object_or_404(RecognitionAward, id=recognitionaward_id)
     if request.method == "POST":
-        form = RecognitionAwardForm(request.POST, instance=recognitionaward)
+        form = RecognitionForm(request.POST, instance=recognitionaward)
         if form.is_valid():
             form.save()
             return redirect("recognitionaward_list")
     else:
-        form = RecognitionAwardForm(instance=recognitionaward)
+        form = RecognitionForm(instance=recognitionaward)
     return render(request, "recognitionaward_form.html", {"form": form})
 
 # Función para eliminar un reconocimiento o premio
@@ -387,24 +387,24 @@ def certificationcourse_list(request):
 # Función para crear una certificación o curso
 def certificationcourse_create(request):
     if request.method == "POST":
-        form = CertificationCourseForm(request.POST)
+        form = CertificationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("certificationcourse_list")
     else:
-        form = CertificationCourseForm()
+        form = CertificationForm()
     return render(request, "certificationcourse_form.html", {"form": form})
 
 # Función para actualizar una certificación o curso
 def certificationcourse_update(request, certificationcourse_id):
     certificationcourse = get_object_or_404(CertificationCourse, id=certificationcourse_id)
     if request.method == "POST":
-        form = CertificationCourseForm(request.POST, instance=certificationcourse)
+        form = CertificationForm(request.POST, instance=certificationcourse)
         if form.is_valid():
             form.save()
             return redirect("certificationcourse_list")
     else:
-        form = CertificationCourseForm(instance=certificationcourse)
+        form = CertificationForm(instance=certificationcourse)
     return render(request, "certificationcourse_form.html", {"form": form})
 
 # Función para eliminar una certificación o curso
