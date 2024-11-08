@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Project List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Project list</h2>
+
+    <!-- Lista de crímenes filtrados -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+            <tr>
+                <td>{{ project.name }}</td>
+                <td>{{ project.description }}</td>
+                <td>{{ project.link }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{% url 'project_update' project.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'project_delete' project.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No Projects found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
