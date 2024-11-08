@@ -16,6 +16,10 @@ class Profile(models.Model):
     dni = models.CharField(max_length=20, unique=True)  # DNI único del usuario
     url = models.URLField(blank=True, null=True)  # URL opcional del usuario
     biografia = models.TextField(blank=True, null=True)  # Biografía opcional del usuario
+    open_to_work = models.BooleanField(blank=False) 
+    vehicle = models.BooleanField(blank=False, null= True)
+    disability =  models.BooleanField(blank=False)
+    disability_percentage = models.IntegerField(blank= True, null= True)
 
     # Relaciones muchos a muchos con otros modelos
     experiencias_laborales = models.ManyToManyField("ExperienciaLaboral", blank=True)  # Experiencias laborales
