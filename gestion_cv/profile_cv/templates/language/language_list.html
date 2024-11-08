@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Language List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>User list</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for language in languages %}
+            <tr>
+                <td>{{ language.name }}</td>
+                <td>{{ language.level }}</td>
+                <td>{{ language.description }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{% url 'language_update' language.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'language_delete' language.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No Users found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
