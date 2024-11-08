@@ -1,125 +1,123 @@
 from django.db import models
 
 # Enums
-class Incorporacion(models.TextChoices):
-    INMEDIATAMENTE = 'INMEDIATAMENTE', 'Inmediatamente'
-    _15_DIAS = '_15_DIAS', '_15_Dias'
-    _7_DIAS = '_7_DIAS', '_7_Dias'
+class Incorporation(models.TextChoices):
+    IMMEDIATELY = 'IMMEDIATELY', 'Immediately'
+    _15_DAYS = '_15_DAYS', '_15_Days'
+    _7_DAYS = '_7_DAYS', '_7_Days'
 
 class Sector(models.TextChoices):
     IT = 'IT', 'It'
-    SALUT = 'SALUT', 'Salut'
-    OTRO = 'OTRO', 'Otro'
+    HEALTH = 'HEALTH', 'Health'
+    OTHER = 'OTHER', 'Other'
 
-# Modelo para representar un usuario
+# Model to represent a user
 class User(models.Model):
-    username = models.CharField(max_length=150, unique=True)  # Nombre de usuario único
-    password = models.CharField(max_length=128)  # Contraseña del usuario
-    nombre = models.CharField(max_length=255)  # Nombre completo del usuario
+    username = models.CharField(max_length=150, unique=True)  # Unique username
+    password = models.CharField(max_length=128)  # User password
+    name = models.CharField(max_length=255)  # Full name of the user
 
-# Modelo para representar el perfil de un usuario
+# Model to represent a user's profile
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # Relación uno a uno con el modelo User
-    direccion = models.CharField(max_length=255)  # Dirección del usuario
-    telefono = models.CharField(max_length=20)  # Teléfono del usuario
-    correo_electronico_1 = models.EmailField()  # Primer correo electrónico del usuario
-    correo_electronico_2 = models.EmailField(blank=True, null=True)  # Segundo correo electrónico opcional
-    dni = models.CharField(max_length=20, unique=True)  # DNI único del usuario
-    url = models.URLField(blank=True, null=True)  # URL opcional del usuario
-    biografia = models.TextField(blank=True, null=True)  # Biografía opcional del usuario
+    user = models.OneToOneField(User, on_delete=models.CASCADE)  # One-to-one relationship with the User model
+    address = models.CharField(max_length=255)  # User's address
+    phone = models.CharField(max_length=20)  # User's phone number
+    email_1 = models.EmailField()  # User's primary email
+    email_2 = models.EmailField(blank=True, null=True)  # Optional secondary email
+    dni = models.CharField(max_length=20, unique=True)  # Unique DNI of the user
+    url = models.URLField(blank=True, null=True)  # Optional URL of the user
+    biography = models.TextField(blank=True, null=True)  # Optional biography of the user
     open_to_work = models.BooleanField(blank=True, null=True) 
-    vehicle = models.BooleanField(blank=False, null= True)
-    disability =  models.BooleanField(blank=True, null=True)
-    disability_percentage = models.IntegerField(
-        blank= True, null= True)
-    incorporation = models.CharField(max_length=50, choices=Incorporacion.choices, blank=True, null=True)  # Incorporación
+    vehicle = models.BooleanField(blank=False, null=True)
+    disability = models.BooleanField(blank=True, null=True)
+    disability_percentage = models.IntegerField(blank=True, null=True)
+    incorporation = models.CharField(max_length=50, choices=Incorporation.choices, blank=True, null=True)  # Incorporation
     sector = models.CharField(max_length=50, choices=Sector.choices, blank=True, null=True)  # Sector
 
+    # Many-to-many relationships with other models
+    work_experiences = models.ManyToManyField("WorkExperience", blank=True)  # Work experiences
+    hard_skills = models.ManyToManyField("HardSkill", blank=True)  # Hard skills
+    soft_skills = models.ManyToManyField("SoftSkill", blank=True)  # Soft skills
+    languages = models.ManyToManyField("Language", blank=True)  # Languages
 
-    # Relaciones muchos a muchos con otros modelos
-    experiencias_laborales = models.ManyToManyField("ExperienciaLaboral", blank=True)  # Experiencias laborales
-    hard_skills = models.ManyToManyField("HardSkill", blank=True)  # Habilidades duras
-    soft_skills = models.ManyToManyField("SoftSkill", blank=True)  # Habilidades blandas
-    idiomas = models.ManyToManyField("Idioma", blank=True)  # Idiomas
+    # One-to-many relationships with other models
+    academic_educations = models.ForeignKey("AcademicEducation", on_delete=models.CASCADE)  # Academic educations
+    volunteerings = models.ForeignKey("Volunteering", on_delete=models.CASCADE, blank=True, null=True)  # Volunteerings
+    projects = models.ForeignKey("Project", on_delete=models.CASCADE, blank=True, null=True)  # Projects
+    publications = models.ForeignKey("Publication", on_delete=models.CASCADE, blank=True, null=True)  # Publications
+    recognitions_awards = models.ForeignKey("RecognitionAward", on_delete=models.CASCADE, blank=True, null=True)  # Recognitions and awards
+    certifications_courses = models.ForeignKey("CertificationCourse", on_delete=models.CASCADE, blank=True, null=True)  # Certifications and courses
 
-    # Relaciones uno a muchos con otros modelos
-    formaciones_academicas = models.ForeignKey("FormacionAcademica", on_delete=models.CASCADE)  # Formaciones académicas
-    voluntariados = models.ForeignKey("Voluntariado", on_delete=models.CASCADE, blank=True, null=True)  # Voluntariados
-    proyectos = models.ForeignKey("Proyecto", on_delete=models.CASCADE, blank=True, null=True)  # Proyectos
-    publicaciones = models.ForeignKey("Publicacion", on_delete=models.CASCADE, blank=True, null=True)  # Publicaciones
-    reconocimientos_premios = models.ForeignKey("ReconocimientoPremio", on_delete=models.CASCADE, blank=True, null=True)  # Reconocimientos y premios
-    certificaciones_cursos = models.ForeignKey("CertificacionCurso", on_delete=models.CASCADE, blank=True, null=True)  # Certificaciones y cursos
+# Model to represent a work experience
+class WorkExperience(models.Model):
+    job_title = models.CharField(max_length=255)  # Job title
+    start_date = models.DateField()  # Start date
+    end_date = models.DateField(blank=True, null=True)  # Optional end date
+    current_job = models.BooleanField(blank=True, null=True)  # Current job
+    company_name = models.CharField(max_length=255)  # Company name
+    description = models.TextField(blank=True, null=True)  # Optional description
+    achievements = models.TextField(blank=True, null=True)  # Optional achievements
+    references = models.TextField(blank=True, null=True)  # Optional references
 
-# Modelo para representar una experiencia laboral
-class ExperienciaLaboral(models.Model):
-    puesto_trabajo = models.CharField(max_length=255)  # Puesto de trabajo
-    fecha_inicio = models.DateField()  # Fecha de inicio
-    fecha_final = models.DateField(blank=True, null=True)  # Fecha de finalización opcional
-    current_job = models.BooleanField(blank=True, null=True)  # Trabajo actual
-    nombre_empresa = models.CharField(max_length=255)  # Nombre de la empresa
-    descripcion = models.TextField(blank=True, null=True)  # Descripción opcional
-    logros_obtenidos = models.TextField(blank=True, null=True)  # Logros obtenidos opcionales
-    referencias = models.TextField(blank=True, null=True)  # Referencias opcionales
+# Model to represent an academic education
+class AcademicEducation(models.Model):
+    title = models.CharField(max_length=255)  # Title of the education
+    academy_name = models.CharField(max_length=255)  # Name of the academy
+    start_date = models.DateField()  # Start date
+    end_date = models.DateField(blank=True, null=True)  # Optional end date
+    current_education = models.BooleanField(blank=True, null=True)  # Current education
+    references = models.TextField(blank=True, null=True)  # Optional references
 
-# Modelo para representar una formación académica
-class FormacionAcademica(models.Model):
-    titulo = models.CharField(max_length=255)  # Título de la formación
-    nombre_academia = models.CharField(max_length=255)  # Nombre de la academia
-    fecha_inicio = models.DateField()  # Fecha de inicio
-    fecha_fin = models.DateField(blank=True, null=True)  # Fecha de finalización opcional
-    current_education = models.BooleanField(blank=True, null=True)  # Educación actual
-    referencias = models.TextField(blank=True, null=True)  # Referencias opcionales
-
-# Modelo para representar una habilidad dura
+# Model to represent a hard skill
 class HardSkill(models.Model):
-    nombre = models.CharField(max_length=255)  # Nombre de la habilidad
-    descripcion = models.TextField(blank=True, null=True)  # Descripción opcional
+    name = models.CharField(max_length=255)  # Name of the skill
+    description = models.TextField(blank=True, null=True)  # Optional description
 
-# Modelo para representar una habilidad blanda
+# Model to represent a soft skill
 class SoftSkill(models.Model):
-    nombre = models.CharField(max_length=255)  # Nombre de la habilidad
-    descripcion = models.TextField(blank=True, null=True)  # Descripción opcional
+    name = models.CharField(max_length=255)  # Name of the skill
+    description = models.TextField(blank=True, null=True)  # Optional description
 
-# Modelo para representar un idioma
-class Idioma(models.Model):
-    nombre = models.CharField(max_length=100)  # Nombre del idioma
-    nivel = models.CharField(max_length=50)  # Nivel de dominio del idioma
-    certificaciones = models.TextField(blank=True, null=True)  # Certificaciones opcionales
+# Model to represent a language
+class Language(models.Model):
+    name = models.CharField(max_length=100)  # Name of the language
+    level = models.CharField(max_length=50)  # Proficiency level of the language
+    certifications = models.TextField(blank=True, null=True)  # Optional certifications
 
-# Modelo para representar un voluntariado
-class Voluntariado(models.Model):
-    puesto_voluntariado = models.CharField(max_length=255)  # Puesto de voluntariado
-    fecha_inicio = models.DateField()  # Fecha de inicio
-    fecha_final = models.DateField(blank=True, null=True)  # Fecha de finalización opcional
-    current_volunteering = models.BooleanField(blank=True, null=True)  # Voluntariado actual
-    nombre_entidad = models.CharField(max_length=255)  # Nombre de la entidad
-    descripcion = models.TextField(blank=True, null=True)  # Descripción opcional
-    logros_obtenidos = models.TextField(blank=True, null=True)  # Logros obtenidos opcionales
-    referencias = models.TextField(blank=True, null=True)  # Referencias opcionales
+# Model to represent a volunteering
+class Volunteering(models.Model):
+    volunteering_position = models.CharField(max_length=255)  # Volunteering position
+    start_date = models.DateField()  # Start date
+    end_date = models.DateField(blank=True, null=True)  # Optional end date
+    current_volunteering = models.BooleanField(blank=True, null=True)  # Current volunteering
+    entity_name = models.CharField(max_length=255)  # Name of the entity
+    description = models.TextField(blank=True, null=True)  # Optional description
+    achievements = models.TextField(blank=True, null=True)  # Optional achievements
+    references = models.TextField(blank=True, null=True)  # Optional references
 
-# Modelo para representar un proyecto
-class Proyecto(models.Model):
-    nombre = models.CharField(max_length=255)  # Nombre del proyecto
-    descripcion = models.TextField()  # Descripción del proyecto
-    enlace = models.URLField(blank=True, null=True)  # Enlace opcional al proyecto
+# Model to represent a project
+class Project(models.Model):
+    name = models.CharField(max_length=255)  # Name of the project
+    description = models.TextField()  # Description of the project
+    link = models.URLField(blank=True, null=True)  # Optional link to the project
 
-# Modelo para representar una publicación
-class Publicacion(models.Model):
-    doi = models.CharField(max_length=100, blank=True, null=True)  # DOI opcional
-    url = models.URLField(blank=True, null=True)  # URL opcional
-    rol = models.CharField(max_length=255)  # Rol en la publicación
-    nombre = models.CharField(max_length=255)  # Nombre de la publicación
+# Model to represent a publication
+class Publication(models.Model):
+    doi = models.CharField(max_length=100, blank=True, null=True)  # Optional DOI
+    url = models.URLField(blank=True, null=True)  # Optional URL
+    role = models.CharField(max_length=255)  # Role in the publication
+    name = models.CharField(max_length=255)  # Name of the publication
 
-# Modelo para representar un reconocimiento o premio
-class ReconocimientoPremio(models.Model):
-    nombre = models.CharField(max_length=255)  # Nombre del reconocimiento o premio
-    entidad = models.CharField(max_length=255)  # Entidad que otorga el reconocimiento o premio
-    descripcion = models.TextField(blank=True, null=True)  # Descripción opcional
+# Model to represent a recognition or award
+class RecognitionAward(models.Model):
+    name = models.CharField(max_length=255)  # Name of the recognition or award
+    entity = models.CharField(max_length=255)  # Entity that grants the recognition or award
+    description = models.TextField(blank=True, null=True)  # Optional description
 
-# Modelo para representar una certificación o curso
-class CertificacionCurso(models.Model):
-    titulo = models.CharField(max_length=255)  # Título de la certificación o curso
-    nombre_academia = models.CharField(max_length=255)  # Nombre de la academia
-    fecha_inicio = models.DateField()  # Fecha de inicio
-    fecha_fin = models.DateField(blank=True, null=True)  # Fecha de finalización opcional
-    current_course = models.BooleanField(blank=True, null=True)  # Curso actua
+# Model to represent a certification or course
+class CertificationCourse(models.Model):
+    title = models.CharField(max_length=255)  # Title of the certification or course
+    academy_name = models.CharField(max_length=255)  # Name of the academy
+    start_date = models.DateField()  # Start date
+    end_date = models.DateField(blank=True, null=True)  # Optional end date
+    current_course = models.BooleanField(blank=True, null=True)  # Current course

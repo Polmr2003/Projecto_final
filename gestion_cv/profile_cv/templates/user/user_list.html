@@ -10,25 +10,25 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Location</th>
-                <th>Actions</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Name</th>
             </tr>
         </thead>
         <tbody>
-            {% for crime in crimes %}
+            {% for user in users %}
             <tr>
-                <td>{{ crime.title }}</td>
-                <td>{{ crime.date|date:"d M Y" }}</td>
-                <td>{{ crime.location }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.name }}</td>
                 <td>
-                    <a class="btn btn-info" href="{% url 'crime_detail' crime.pk %}">View</a>
-                    <a class="btn btn-warning" href="{% url 'crime_update' crime.pk %}">Edit</a>
-                    <a class="btn btn-danger" href="{% url 'crime_delete' crime.pk %}">Delete</a>
+                    <a class="btn btn-warning" href="{% url 'user_update' user.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'user_delete' user.pk %}">Delete</a>
                 </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="4">No crimes found.</td>
+                <td colspan="4">No Users found.</td>
             </tr>
             {% endfor %}
         </tbody>
