@@ -27,12 +27,12 @@ class Profile(models.Model):
     dni = models.CharField(max_length=20, unique=True)  # DNI único del usuario
     url = models.URLField(blank=True, null=True)  # URL opcional del usuario
     biografia = models.TextField(blank=True, null=True)  # Biografía opcional del usuario
-    open_to_work = models.BooleanField(blank=False) 
+    open_to_work = models.BooleanField(blank=True, null=True) 
     vehicle = models.BooleanField(blank=False, null= True)
-    disability =  models.BooleanField(blank=False)
+    disability =  models.BooleanField(blank=True, null=True)
     disability_percentage = models.IntegerField(blank= True, null= True)
-    incorporation = models.CharField(max_length=50, choices=Incorporacion.choices)  # Incorporación
-    sector = models.CharField(max_length=50, choices=Sector.choices)  # Sector
+    incorporation = models.CharField(max_length=50, choices=Incorporacion.choices, blank=True, null=True)  # Incorporación
+    sector = models.CharField(max_length=50, choices=Sector.choices, blank=True, null=True)  # Sector
 
 
     # Relaciones muchos a muchos con otros modelos
@@ -54,7 +54,7 @@ class ExperienciaLaboral(models.Model):
     puesto_trabajo = models.CharField(max_length=255)  # Puesto de trabajo
     fecha_inicio = models.DateField()  # Fecha de inicio
     fecha_final = models.DateField(blank=True, null=True)  # Fecha de finalización opcional
-    current_job = models.BooleanField(blank=False)  # Trabajo actual
+    current_job = models.BooleanField(blank=True, null=True)  # Trabajo actual
     nombre_empresa = models.CharField(max_length=255)  # Nombre de la empresa
     descripcion = models.TextField(blank=True, null=True)  # Descripción opcional
     logros_obtenidos = models.TextField(blank=True, null=True)  # Logros obtenidos opcionales
@@ -66,7 +66,7 @@ class FormacionAcademica(models.Model):
     nombre_academia = models.CharField(max_length=255)  # Nombre de la academia
     fecha_inicio = models.DateField()  # Fecha de inicio
     fecha_fin = models.DateField(blank=True, null=True)  # Fecha de finalización opcional
-    current_education = models.BooleanField(blank=False)  # Educación actual
+    current_education = models.BooleanField(blank=True, null=True)  # Educación actual
     referencias = models.TextField(blank=True, null=True)  # Referencias opcionales
 
 # Modelo para representar una habilidad dura
@@ -90,7 +90,7 @@ class Voluntariado(models.Model):
     puesto_voluntariado = models.CharField(max_length=255)  # Puesto de voluntariado
     fecha_inicio = models.DateField()  # Fecha de inicio
     fecha_final = models.DateField(blank=True, null=True)  # Fecha de finalización opcional
-    current_volunteering = models.BooleanField(blank=False)  # Voluntariado actual
+    current_volunteering = models.BooleanField(blank=True, null=True)  # Voluntariado actual
     nombre_entidad = models.CharField(max_length=255)  # Nombre de la entidad
     descripcion = models.TextField(blank=True, null=True)  # Descripción opcional
     logros_obtenidos = models.TextField(blank=True, null=True)  # Logros obtenidos opcionales
@@ -121,4 +121,4 @@ class CertificacionCurso(models.Model):
     nombre_academia = models.CharField(max_length=255)  # Nombre de la academia
     fecha_inicio = models.DateField()  # Fecha de inicio
     fecha_fin = models.DateField(blank=True, null=True)  # Fecha de finalización opcional
-    current_course = models.BooleanField(blank=False)  # Curso actua
+    current_course = models.BooleanField(blank=True, null=True)  # Curso actua
