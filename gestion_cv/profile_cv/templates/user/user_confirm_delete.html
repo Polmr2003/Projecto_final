@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Delete User</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Delete User{% endblock %}
+{% block content %}
     <div class="container">
         <h1>Confirm Delete User</h1>
         <p>Are you sure you want to delete the user "{{ user.username }}"?</p>
@@ -16,5 +10,4 @@
             <a href="{% url 'user_list' %}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}
