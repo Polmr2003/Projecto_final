@@ -159,15 +159,19 @@ def academic_education_delete(request, academic_education_id):
     academic_education = get_object_or_404(AcademicEducation, id=academic_education_id)
     if request.method == "POST":
         academic_education.delete()
-        return redirect("hardskill_list")
-    return render(request, "hardskill_confirm_delete.html", {"hardskill": academic_education})
+        return redirect("academic_education_list")
+    return render(request, "academic_education_confirm_delete.html", {"academic_education": academic_education})
 
-# Función para listar las SoftSkills
+# * |--------------------------------------------------------------------------
+# * | Class SoftSkill
+# * |--------------------------------------------------------------------------
+
+#? Función para listar las SoftSkills
 def softskill_list(request):
     softskills = SoftSkill.objects.all()
     return render(request, "softskill_list.html", {"softskills": softskills})
 
-# Función para crear una SoftSkill
+#? Función para crear una SoftSkill
 def softskill_create(request):
     if request.method == "POST":
         form = SoftSkillForm(request.POST)
@@ -178,7 +182,7 @@ def softskill_create(request):
         form = SoftSkillForm()
     return render(request, "softskill_form.html", {"form": form})
 
-# Función para actualizar una SoftSkill
+#? Función para actualizar una SoftSkill
 def softskill_update(request, softskill_id):
     softskill = get_object_or_404(SoftSkill, id=softskill_id)
     if request.method == "POST":
@@ -190,8 +194,7 @@ def softskill_update(request, softskill_id):
         form = SoftSkillForm(instance=softskill)
     return render(request, "softskill_form.html", {"form": form})
 
-
-# Función para eliminar una SoftSkill
+#? Función para eliminar una SoftSkill
 def softskill_delete(request, softskill_id):
     softskill = get_object_or_404(SoftSkill, id=softskill_id)
     if request.method == "POST":
@@ -199,12 +202,56 @@ def softskill_delete(request, softskill_id):
         return redirect("softskill_list")
     return render(request, "softskill_confirm_delete.html", {"softskill": softskill})
 
-# Función para listar los idiomas
+# * |--------------------------------------------------------------------------
+# * | Class HardSkill
+# * |--------------------------------------------------------------------------
+
+#? Función para listar las HardSkills
+def hardskill_list(request):
+    hardskills = HardSkill.objects.all()
+    return render(request, "hardskill_list.html", {"hardskills": hardskills})
+
+#? Función para crear una HardSkill
+def hardskill_create(request):
+    if request.method == "POST":
+        form = HardSkillForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("hardskill_list")
+    else:
+        form = HardSkillForm()
+    return render(request, "hardskill_form.html", {"form": form})
+
+#? Función para actualizar una HardSkill
+def hardskill_update(request, hardskill_id):
+    hardskill = get_object_or_404(HardSkill, id=hardskill_id)
+    if request.method == "POST":
+        form = HardSkillForm(request.POST, instance=hardskill)
+        if form.is_valid():
+            form.save()
+            return redirect("hardskill_list")
+    else:
+        form = HardSkillForm(instance=hardskill)
+    return render(request, "hardskill_form.html", {"form": form})
+
+#? Función para eliminar una HardSkill
+def hardskill_delete(request, hardskill_id):
+    hardskill = get_object_or_404(HardSkill, id=hardskill_id)
+    if request.method == "POST":
+        hardskill.delete()
+        return redirect("hardskill_list")
+    return render(request, "hardskill_confirm_delete.html", {"hardskill": hardskill})
+
+# * |--------------------------------------------------------------------------
+# * | language
+# * |--------------------------------------------------------------------------
+
+#? Función para listar los idiomas
 def language_list(request):
     languages = Language.objects.all()
     return render(request, "language_list.html", {"languages": languages})
 
-# Función para crear un idioma
+#? Función para crear un idioma
 def language_create(request):
     if request.method == "POST":
         form = LanguageForm(request.POST)
@@ -215,7 +262,7 @@ def language_create(request):
         form = LanguageForm()
     return render(request, "language_form.html", {"form": form})
 
-# Función para actualizar un idioma
+#? Función para actualizar un idioma
 def language_update(request, language_id):
     language = get_object_or_404(Language, id=language_id)
     if request.method == "POST":
@@ -227,7 +274,7 @@ def language_update(request, language_id):
         form = LanguageForm(instance=language)
     return render(request, "language_form.html", {"form": form})
 
-# Función para eliminar un idioma
+#? Función para eliminar un idioma
 def language_delete(request, language_id):
     language = get_object_or_404(Language, id=language_id)
     if request.method == "POST":
@@ -235,12 +282,16 @@ def language_delete(request, language_id):
         return redirect("language_list")
     return render(request, "language_confirm_delete.html", {"language": language})
 
-# Función para listar los voluntariados
+# * |--------------------------------------------------------------------------
+# * | Class Volunteering
+# * |--------------------------------------------------------------------------
+
+#? Función para listar los voluntariados
 def volunteering_list(request):
     volunteerings = Volunteering.objects.all()
     return render(request, "volunteering_list.html", {"volunteerings": volunteerings})
 
-# Función para crear un voluntariado
+#? Función para crear un voluntariado
 def volunteering_create(request):
     if request.method == "POST":
         form = VolunteeringForm(request.POST)
@@ -251,7 +302,7 @@ def volunteering_create(request):
         form = VolunteeringForm()
     return render(request, "volunteering_form.html", {"form": form})
 
-# Función para actualizar un voluntariado
+#? Función para actualizar un voluntariado
 def volunteering_update(request, volunteering_id):
     volunteering = get_object_or_404(Volunteering, id=volunteering_id)
     if request.method == "POST":
@@ -263,7 +314,7 @@ def volunteering_update(request, volunteering_id):
         form = VolunteeringForm(instance=volunteering)
     return render(request, "volunteering_form.html", {"form": form})
 
-# Función para eliminar un voluntariado
+#? Función para eliminar un voluntariado
 def volunteering_delete(request, volunteering_id):
     volunteering = get_object_or_404(Volunteering, id=volunteering_id)
     if request.method == "POST":
@@ -271,12 +322,16 @@ def volunteering_delete(request, volunteering_id):
         return redirect("volunteering_list")
     return render(request, "volunteering_confirm_delete.html", {"volunteering": volunteering})
 
-# Función para listar los proyectos
+# * |--------------------------------------------------------------------------
+# * | Class Project
+# * |--------------------------------------------------------------------------
+
+#? Función para listar los proyectos
 def project_list(request):
     projects = Project.objects.all()
     return render(request, "project_list.html", {"projects": projects})
 
-# Función para crear un proyecto
+#? Función para crear un proyecto
 def project_create(request):
     if request.method == "POST":
         form = ProjectForm(request.POST)
@@ -287,7 +342,7 @@ def project_create(request):
         form = ProjectForm()
     return render(request, "project_form.html", {"form": form})
 
-# Función para actualizar un proyecto
+#? Función para actualizar un proyecto
 def project_update(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     if request.method == "POST":
@@ -299,7 +354,7 @@ def project_update(request, project_id):
         form = ProjectForm(instance=project)
     return render(request, "project_form.html", {"form": form})
 
-# Función para eliminar un proyecto
+#? Función para eliminar un proyecto
 def project_delete(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     if request.method == "POST":
@@ -307,48 +362,16 @@ def project_delete(request, project_id):
         return redirect("project_list")
     return render(request, "project_confirm_delete.html", {"project": project})
 
-# Función para listar las publicaciones
-def publication_list(request):
-    publications = Publication.objects.all()
-    return render(request, "publication_list.html", {"publications": publications})
+# * |--------------------------------------------------------------------------
+# * | Class RecognitionAward
+# * |--------------------------------------------------------------------------
 
-# Función para crear una publicación
-def publication_create(request):
-    if request.method == "POST":
-        form = PublicationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("publication_list")
-    else:
-        form = PublicationForm()
-    return render(request, "publication_form.html", {"form": form})
-
-# Función para actualizar una publicación
-def publication_update(request, publication_id):
-    publication = get_object_or_404(Publication, id=publication_id)
-    if request.method == "POST":
-        form = PublicationForm(request.POST, instance=publication)
-        if form.is_valid():
-            form.save()
-            return redirect("publication_list")
-    else:
-        form = PublicationForm(instance=publication)
-    return render(request, "publication_form.html", {"form": form})
-
-# Función para eliminar una publicación
-def publication_delete(request, publication_id):
-    publication = get_object_or_404(Publication, id=publication_id)
-    if request.method == "POST":
-        publication.delete()
-        return redirect("publication_list")
-    return render(request, "publication_confirm_delete.html", {"publication": publication})
-
-# Función para listar los reconocimientos y premios
+#? Función para listar los reconocimientos y premios
 def recognitionaward_list(request):
     recognitions_awards = RecognitionAward.objects.all()
     return render(request, "recognitionaward_list.html", {"recognitions_awards": recognitions_awards})
 
-# Función para crear un reconocimiento o premio
+#? Función para crear un reconocimiento o premio
 def recognitionaward_create(request):
     if request.method == "POST":
         form = RecognitionForm(request.POST)
@@ -359,7 +382,7 @@ def recognitionaward_create(request):
         form = RecognitionForm()
     return render(request, "recognitionaward_form.html", {"form": form})
 
-# Función para actualizar un reconocimiento o premio
+#? Función para actualizar un reconocimiento o premio
 def recognitionaward_update(request, recognitionaward_id):
     recognitionaward = get_object_or_404(RecognitionAward, id=recognitionaward_id)
     if request.method == "POST":
@@ -371,7 +394,7 @@ def recognitionaward_update(request, recognitionaward_id):
         form = RecognitionForm(instance=recognitionaward)
     return render(request, "recognitionaward_form.html", {"form": form})
 
-# Función para eliminar un reconocimiento o premio
+#? Función para eliminar un reconocimiento o premio
 def recognitionaward_delete(request, recognitionaward_id):
     recognitionaward = get_object_or_404(RecognitionAward, id=recognitionaward_id)
     if request.method == "POST":
@@ -379,12 +402,16 @@ def recognitionaward_delete(request, recognitionaward_id):
         return redirect("recognitionaward_list")
     return render(request, "recognitionaward_confirm_delete.html", {"recognitionaward": recognitionaward})
 
-# Función para listar las certificaciones y cursos
+# * |--------------------------------------------------------------------------
+# * | Class CertificationCourse
+# * |--------------------------------------------------------------------------
+
+#? Función para listar las certificaciones y cursos
 def certificationcourse_list(request):
     certifications_courses = CertificationCourse.objects.all()
     return render(request, "certificationcourse_list.html", {"certifications_courses": certifications_courses})
 
-# Función para crear una certificación o curso
+#? Función para crear una certificación o curso
 def certificationcourse_create(request):
     if request.method == "POST":
         form = CertificationForm(request.POST)
