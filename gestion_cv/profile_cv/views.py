@@ -367,12 +367,12 @@ def project_delete(request, project_id):
 # * |--------------------------------------------------------------------------
 
 #? Función para listar los reconocimientos y premios
-def recognitionaward_list(request):
+def recognition_award_list(request):
     recognitions_awards = RecognitionAward.objects.all()
     return render(request, "recognitionaward_list.html", {"recognitions_awards": recognitions_awards})
 
 #? Función para crear un reconocimiento o premio
-def recognitionaward_create(request):
+def recognition_award_create(request):
     if request.method == "POST":
         form = RecognitionForm(request.POST)
         if form.is_valid():
@@ -383,7 +383,7 @@ def recognitionaward_create(request):
     return render(request, "recognitionaward_form.html", {"form": form})
 
 #? Función para actualizar un reconocimiento o premio
-def recognitionaward_update(request, recognitionaward_id):
+def recognition_award_update(request, recognitionaward_id):
     recognitionaward = get_object_or_404(RecognitionAward, id=recognitionaward_id)
     if request.method == "POST":
         form = RecognitionForm(request.POST, instance=recognitionaward)
@@ -395,7 +395,7 @@ def recognitionaward_update(request, recognitionaward_id):
     return render(request, "recognitionaward_form.html", {"form": form})
 
 #? Función para eliminar un reconocimiento o premio
-def recognitionaward_delete(request, recognitionaward_id):
+def recognition_award_delete(request, recognitionaward_id):
     recognitionaward = get_object_or_404(RecognitionAward, id=recognitionaward_id)
     if request.method == "POST":
         recognitionaward.delete()
@@ -407,12 +407,12 @@ def recognitionaward_delete(request, recognitionaward_id):
 # * |--------------------------------------------------------------------------
 
 #? Función para listar las certificaciones y cursos
-def certificationcourse_list(request):
+def certification_course_list(request):
     certifications_courses = CertificationCourse.objects.all()
     return render(request, "certificationcourse_list.html", {"certifications_courses": certifications_courses})
 
 #? Función para crear una certificación o curso
-def certificationcourse_create(request):
+def certification_course_create(request):
     if request.method == "POST":
         form = CertificationForm(request.POST)
         if form.is_valid():
@@ -423,7 +423,7 @@ def certificationcourse_create(request):
     return render(request, "certificationcourse_form.html", {"form": form})
 
 # Función para actualizar una certificación o curso
-def certificationcourse_update(request, certificationcourse_id):
+def certification_course_update(request, certificationcourse_id):
     certificationcourse = get_object_or_404(CertificationCourse, id=certificationcourse_id)
     if request.method == "POST":
         form = CertificationForm(request.POST, instance=certificationcourse)
@@ -435,11 +435,49 @@ def certificationcourse_update(request, certificationcourse_id):
     return render(request, "certificationcourse_form.html", {"form": form})
 
 # Función para eliminar una certificación o curso
-def certificationcourse_delete(request, certificationcourse_id):
+def certification_course_delete(request, certificationcourse_id):
     certificationcourse = get_object_or_404(CertificationCourse, id=certificationcourse_id)
     if request.method == "POST":
         certificationcourse.delete()
         return redirect("certificationcourse_list")
     return render(request, "certificationcourse_confirm_delete.html", {"certificationcourse": certificationcourse})
 
+# * |--------------------------------------------------------------------------
+# * | Class Publication
+# * |--------------------------------------------------------------------------
 
+#? Función para listar las publicaciones
+def publication_list(request):
+    publications = Publication.objects.all()
+    return render(request, "publication_list.html", {"publications": publications})
+
+#? Función para crear una publicación
+def publication_create(request):
+    if request.method == "POST":
+        form = PublicationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("publication_list")
+    else:
+        form = PublicationForm()
+    return render(request, "publication_form.html", {"form": form})
+
+#? Función para actualizar una publicación
+def publication_update(request, publication_id):
+    publication = get_object_or_404(Publication, id=publication_id)
+    if request.method == "POST":
+        form = PublicationForm(request.POST, instance=publication)
+        if form.is_valid():
+            form.save()
+            return redirect("publication_list")
+    else:
+        form = PublicationForm(instance=publication)
+    return render(request, "publication_form.html", {"form": form})
+
+#? Función para eliminar una publicación
+def publication_delete(request, publication_id):
+    publication = get_object_or_404(Publication, id=publication_id)
+    if request.method == "POST":
+        publication.delete()
+        return redirect("publication_list")
+    return render(request, "publication_confirm_delete.html", {"publication": publication})
