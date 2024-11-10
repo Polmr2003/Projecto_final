@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Volunteering List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Volunteering list</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for volunteering in volunteerings %}
+            <tr>
+                <td>{{ volunteering.volunteering_position }}</td>
+                <td>{{ volunteering.start_date }}</td>
+                <td>{{ volunteering.end_date }}</td>
+                <td>{{ volunteering.current_volunteering }}</td>
+                <td>{{ volunteering.description }}</td>
+                <td>{{ volunteering.entity_name }}</td>
+                <td>{{ volunteering.achievements }}</td>
+                <td>{{ volunteering.references }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{% url 'volunteering_update' volunteering.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'volunteering_delete' volunteering.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No Volunteerings found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
