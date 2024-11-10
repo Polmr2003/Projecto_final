@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Delete Softskill{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Confirm Delete Softskill</h1>
+        <p>Are you sure you want to delete the Softskill "{{ hardskill.name }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, delete</button>
+            <a href="{% url 'hardskill_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Certification Course{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Certification Course</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Academy Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Current Course</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for certificationCourse in certificationCourses %}
+            <tr>
+                <td>{{ certificationCourse.title }}</td>
+                <td>{{ certificationCourse.academy_name }}</td>
+                <td>{{ certificationCourse.start_date }}</td>
+                <td>{{ certificationCourse.end_date }}</td>
+                <td>{{ certificationCourse.current_course }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{% url 'certificationCourse_update' certificationCourse.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'certificationCourse_delete' certificationCourse.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No CertificationCourses found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

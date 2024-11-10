@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Publication List{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Publication list</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Doi</th>
+                <th>Url</th>
+                <th>Role</th>
+                <th>name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for publication in publications %}
+            <tr>
+                <td>{{ publication.doi }}</td>
+                <td>{{ publication.url }}</td>
+                <td>{{ publication.role }}</td>
+                <td>{{ publication.name }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{% url 'publication_update' publication.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'publication_delete' publication.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No Publications found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
