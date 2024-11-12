@@ -21,7 +21,7 @@ urlpatterns = [
 
     # Home URL
     path('', home, name='home'),
-    
+
     # User URLs
     path('users/', user_list, name='user_list'),
     path('users/create/', user_create, name='user_create'),
