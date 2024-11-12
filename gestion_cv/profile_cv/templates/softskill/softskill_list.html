@@ -9,19 +9,18 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Username</th>
-                <th>Password</th>
                 <th>Name</th>
+                <th>Description</th>
             </tr>
         </thead>
         <tbody>
-            {% for hardskill in hardskills %}
+            {% for softskill in hardskills %}
             <tr>
-                <td>{{ hardskill.name }}</td>
-                <td>{{ hardskill.description }}</td>
+                <td>{{ softskill.name }}</td>
+                <td>{{ softkill.description }}</td>
                 <td>
-                    <a class="btn btn-warning" href="{% url 'hardskill_update' hardskill.pk %}">Edit</a>
-                    <a class="btn btn-danger" href="{% url 'hardskill_delete' hardskill.pk %}">Delete</a>
+                    <a class="btn btn-warning" href="{% url 'soft_skill_update' softskill.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'soft_skill_delete' softskill.pk %}">Delete</a>
                 </td>
             </tr>
             {% empty %}

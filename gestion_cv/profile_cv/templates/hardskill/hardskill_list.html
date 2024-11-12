@@ -9,9 +9,9 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Username</th>
-                <th>Password</th>
                 <th>Name</th>
+                <th>Description</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -20,8 +20,8 @@
                 <td>{{ hardskill.name }}</td>
                 <td>{{ hardskill.description }}</td>
                 <td>
-                    <a class="btn btn-warning" href="{% url 'hardskill_update' hardskill.pk %}">Edit</a>
-                    <a class="btn btn-danger" href="{% url 'hardskill_delete' hardskill.pk %}">Delete</a>
+                    <a class="btn btn-warning" href="{% url 'hard_skill_update' hardskill.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'hard_skill_delete' hardskill.pk %}">Delete</a>
                 </td>
             </tr>
             {% empty %}
