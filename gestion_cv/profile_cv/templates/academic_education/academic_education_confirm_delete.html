@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Delete Acedemic education{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Confirm Delete Acedemic education</h1>
+        <p>Are you sure you want to delete the Acedemic education "{{ profile.user }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, delete</button>
+            <a href="{% url 'academic_education_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

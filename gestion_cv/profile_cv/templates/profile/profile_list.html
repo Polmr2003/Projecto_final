@@ -1,34 +1,77 @@
 {% extends 'base.html' %}
 
-{% block title %}User List{% endblock %}
+{% block title %}Profile List{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h2>User list</h2>
+    <h2>Profile list</h2>
 
-    <!-- Lista de crímenes filtrados -->
+    <!-- Lista de profile -->
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Name</th>
+                <th>user</th>
+                <th>address</th>
+                <th>phone</th>
+                <th>email_1</th>
+                <th>email_2</th>
+                <th>dni</th>
+                <th>url</th>
+                <th>biography</th>
+                <th>open_to_work</th>
+                <th>vehicle</th>
+                <th>disability</th>
+                <th>disability_percentage</th>
+                <th>incorporation</th>
+                <th>sector</th>
+                <th>work_experiences</th>
+                <th>hard_skills</th>
+                <th>soft_skills</th>
+                <th>languages</th>
+                <th>academic_educations</th>
+                <th>volunteerings</th>
+                <th>projects</th>
+                <th>publications</th>
+                <th>recognitions_awards</th>
+                <th>certifications_courses</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            {% for user in users %}
+            {% for profile in profiles %}
             <tr>
-                <td>{{ user.username }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.name }}</td>
+                <td>{{ profile.user.username }}</td>
+                <td>{{ profile.address }}</td>
+                <td>{{ profile.phone }}</td>
+                <td>{{ profile.email_1 }}</td>
+                <td>{{ profile.email_2 }}</td>
+                <td>{{ profile.dni }}</td>
+                <td>{{ profile.url }}</td>
+                <td>{{ profile.biography }}</td>
+                <td>{{ profile.open_to_work }}</td>
+                <td>{{ profile.vehicle }}</td>
+                <td>{{ profile.disability }}</td>
+                <td>{{ profile.disability_percentage }}</td>
+                <td>{{ profile.incorporation }}</td>
+                <td>{{ profile.sector }}</td>
+                <td>{{ profile.work_experiences }}</td>
+                <td>{{ profile.hard_skills }}</td>
+                <td>{{ profile.soft_skills }}</td>
+                <td>{{ profile.languages }}</td>
+                <td>{{ profile.academic_educations }}</td>
+                <td>{{ profile.volunteerings }}</td>
+                <td>{{ profile.projects }}</td>
+                <td>{{ profile.publications }}</td>
+                <td>{{ profile.recognitions_awards }}</td>
+                <td>{{ profile.certifications_courses }}</td>
                 <td>
-                    <a class="btn btn-warning" href="{% url 'user_update' user.pk %}">Edit</a>
-                    <a class="btn btn-danger" href="{% url 'user_delete' user.pk %}">Delete</a>
+                    <a class="btn btn-warning" href="{% url 'profile_update' profile.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'profile_delete' profile.pk %}">Delete</a>
                 </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="4">No Users found.</td>
+                <td colspan="25">No Profiles found.</td>
             </tr>
             {% endfor %}
         </tbody>

@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}Add/Edit User{% endblock %}
+{% block title %}Add/Edit Acedemic education{% endblock %}
 {% block content %}
-<h1>{{ view.action }}User</h1>
+<h1>{{ view.action }}Acedemic education</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button class="btn btn-success" type="submit">Submit</button>
-    <a class="btn btn-secondary" href="{% url 'user_list' %}">Cancel</a>
+    <a class="btn btn-secondary" href="{% url 'academic_education_list' %}">Cancel</a>
 </form>
 {% endblock %}
