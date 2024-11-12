@@ -24,7 +24,7 @@ def user_create(request):
             return redirect("user_list")
     else:
         form = UserForm()
-    return render(request, "user_form.html", {"form": form})
+    return render(request, "user/user_form.html", {"form": form})
 
 # ? Función para listar los usuarios
 def user_list(request):
