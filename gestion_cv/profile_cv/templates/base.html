@@ -9,13 +9,23 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <!-- <a class="navbar-brand" href="{% url 'police_officer_list' %}">Police Management</a> -->
         <a class="navbar-brand" href="/">Management</a>
         <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="{% url 'police_officer_list' %}">Police Officers</a></li>
-            </ul>
-        </div>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="{% url 'user_list' %}">Users</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'profile_list' %}">Profiles</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'work_experience_list' %}">Work Experiences</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'academic_education_list' %}">Academic Educations</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'soft_skill_list' %}">Soft Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'hard_skill_list' %}">Hard Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'language_list' %}">Languages</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'volunteering_list' %}">Volunteerings</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'project_list' %}">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'recognition_award_list' %}">Recognitions & Awards</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'certification_course_list' %}">Certifications & Courses</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'publication_list' %}">Publications</a></li>
+    </ul>
+</div>
     </nav>
     <div class="container mt-4">
         {% block content %}

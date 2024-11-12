@@ -36,7 +36,7 @@ class ProfileForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["username", "password", "nombre"]
+        fields = ["username", "password", "name"]
 
 # Form to represent a work experience
 class WorkExperienceForm(forms.ModelForm):
