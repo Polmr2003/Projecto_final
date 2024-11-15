@@ -34,13 +34,11 @@ class Profile(models.Model):
     incorporation = models.CharField(max_length=50, choices=Incorporation.choices, blank=True, null=True)  # Incorporation
     sector = models.CharField(max_length=50, choices=Sector.choices, blank=True, null=True)  # Sector
 
-    # Many-to-many relationships with other models
-    work_experiences = models.ManyToManyField("WorkExperience", blank=True)  # Work experiences
-    hard_skills = models.ManyToManyField("HardSkill", blank=True)  # Hard skills
-    soft_skills = models.ManyToManyField("SoftSkill", blank=True)  # Soft skills
-    languages = models.ManyToManyField("Language", blank=True)  # Languages
-
     # One-to-many relationships with other models
+    work_experiences = models.ForeignKey("WorkExperience", on_delete=models.CASCADE)  # Work experiences
+    hard_skills = models.ForeignKey("HardSkill", on_delete=models.CASCADE)  # Hard skills
+    soft_skills = models.ForeignKey("SoftSkill", on_delete=models.CASCADE)  # Soft skills
+    languages = models.ForeignKey("Language", on_delete=models.CASCADE)  # Languages
     academic_educations = models.ForeignKey("AcademicEducation", on_delete=models.CASCADE)  # Academic educations
     volunteerings = models.ForeignKey("Volunteering", on_delete=models.CASCADE, blank=True, null=True)  # Volunteerings
     projects = models.ForeignKey("Project", on_delete=models.CASCADE, blank=True, null=True)  # Projects
