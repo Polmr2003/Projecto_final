@@ -490,3 +490,45 @@ def publication_delete(request, publication_id):
         publication.delete()
         return redirect("publication_list")
     return render(request, "publication/publication_confirm_delete.html", {"publication": publication})
+
+# * |-------------------------------------------------------------------------- 
+# * | User_CV
+# * |--------------------------------------------------------------------------
+
+#? Función para listar los CV
+def user_cv_list(request):
+    user_cv = UserCV.objects.all()
+    return render(request, "user_cv/user_cv_list.html", {"user_cv": user_cv})
+
+#? Función para crear un CV
+def user_cv_create(request):
+    if request.method == "POST":
+        form = UserCVForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("user_cv_list")
+    else:
+        form = UserCVForm()
+    return render(request, "user_cv/user_cv_form.html", {"form": form})
+
+#? Función para actualizar un CV
+def user_cv_update(request, user_cv_id):
+    user_cv = get_object_or_404(UserCV, id=user_cv_id)
+    if request.method == "POST":
+        form = UserCVForm(request.POST, instance=user_cv)
+        if form.is_valid():
+            form.save()
+            return redirect("user_cv_list")
+    else:
+        form = UserCVForm(instance=user_cv)
+    return render(request, "user_cv/user_cv_form.html", {"form": form})
+
+#? Función para eliminar un CV
+
+def user_cv_delete(request, user_cv_id):
+    user_cv = get_object_or_404(UserCV, id=user_cv_id)
+    if request.method == "POST":
+        user_cv.delete()
+        return redirect("user_cv_list")
+    return render(request, "user_cv/user_cv_confirm_delete.html", {"user_cv": user_cv})
+
