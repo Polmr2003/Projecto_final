@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}Delete Hard Skill{% endblock %}
 {% block content %}
-    <div class="container">
-        <h1>Confirm Delete Hard Skill</h1>
-        <p>Are you sure you want to delete the hard skill "{{ hardskill.name }}"?</p>
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Yes, delete</button>
-            <a href="{% url 'hard_skill_list' %}" class="btn btn-secondary">Cancel</a>
-        </form>
-    </div>
-    {% endblock %}
+<div class="container">
+    <h1>Confirm Delete Hard Skill</h1>
+    <p>Are you sure you want to delete the hard skill "{{ hardskill.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, delete</button>
+        <a href="{% url 'hard_skill_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}
