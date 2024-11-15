@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Delete Volunteering Award{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Confirm Delete Volunteering Award</h1>
+        <p>Are you sure you want to delete the Volunteering Award "{{ volunteering.name }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, delete</button>
+            <a href="{% url 'recognition_award_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+{% endblock %}

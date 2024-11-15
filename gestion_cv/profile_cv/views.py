@@ -104,7 +104,7 @@ def work_experience_create(request):
             return redirect("work_experience_list")
     else:
         form = WorkExperienceForm()
-    return render(request, "wwork_experience/ork_experience_form.html", {"form": form})
+    return render(request, "work_experience/work_experience_form.html", {"form": form})
 
 # ? Función para listar las experiencias laborales
 def work_experience_list(request):
@@ -232,8 +232,8 @@ def hardskill_create(request):
     return render(request, "hardskill/hardskill_form.html", {"form": form})
 
 #? Función para actualizar una HardSkill
-def hardskill_update(request, hardskill_id):
-    hardskill = get_object_or_404(HardSkill, id=hardskill_id)
+def hardskill_update(request, hard_skill_id):
+    hardskill = get_object_or_404(HardSkill, id=hard_skill_id)
     if request.method == "POST":
         form = HardSkillForm(request.POST, instance=hardskill)
         if form.is_valid():
@@ -244,11 +244,11 @@ def hardskill_update(request, hardskill_id):
     return render(request, "hardskill/hardskill_form.html", {"form": form})
 
 #? Función para eliminar una HardSkill
-def hardskill_delete(request, hardskill_id):
-    hardskill = get_object_or_404(HardSkill, id=hardskill_id)
+def hardskill_delete(request, hard_skill_id):
+    hardskill = get_object_or_404(HardSkill, id=hard_skill_id)
     if request.method == "POST":
         hardskill.delete()
-        return redirect("hardskill_list")
+        return redirect("hard_skill_list")
     return render(request, "hardskill/hardskill_confirm_delete.html", {"hardskill": hardskill})
 
 # * |--------------------------------------------------------------------------
@@ -426,29 +426,29 @@ def certification_course_create(request):
         form = CertificationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("certificationcourse_list")
+            return redirect("certification_course_list")
     else:
         form = CertificationForm()
     return render(request, "certificationcourse/certificationcourse_form.html", {"form": form})
 
 # Función para actualizar una certificación o curso
-def certification_course_update(request, certificationcourse_id):
-    certificationcourse = get_object_or_404(CertificationCourse, id=certificationcourse_id)
+def certification_course_update(request, certification_course_id):
+    certificationcourse = get_object_or_404(CertificationCourse, id=certification_course_id)
     if request.method == "POST":
         form = CertificationForm(request.POST, instance=certificationcourse)
         if form.is_valid():
             form.save()
-            return redirect("certificationcourse_list")
+            return redirect("certification_course_list")
     else:
         form = CertificationForm(instance=certificationcourse)
     return render(request, "certificationcourse/certificationcourse_form.html", {"form": form})
 
 # Función para eliminar una certificación o curso
-def certification_course_delete(request, certificationcourse_id):
-    certificationcourse = get_object_or_404(CertificationCourse, id=certificationcourse_id)
+def certification_course_delete(request, certification_course_id):
+    certificationcourse = get_object_or_404(CertificationCourse, id=certification_course_id)
     if request.method == "POST":
         certificationcourse.delete()
-        return redirect("certificationcourse_list")
+        return redirect("certification_course_list")
     return render(request, "certificationcourse/certificationcourse_confirm_delete.html", {"certificationcourse": certificationcourse})
 
 # * |--------------------------------------------------------------------------
