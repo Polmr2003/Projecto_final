@@ -104,7 +104,7 @@ def work_experience_create(request):
             return redirect("work_experience_list")
     else:
         form = WorkExperienceForm()
-    return render(request, "wwork_experience/ork_experience_form.html", {"form": form})
+    return render(request, "work_experience/work_experience_form.html", {"form": form})
 
 # ? Función para listar las experiencias laborales
 def work_experience_list(request):
