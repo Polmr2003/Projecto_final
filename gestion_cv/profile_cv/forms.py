@@ -128,3 +128,34 @@ class CertificationForm(forms.ModelForm):
             "end_date",
             "current_course",
         ]
+
+#form to represent a user cv
+class UserCvForm(forms.ModelForm):
+    class Meta:
+        model = User_cv
+        fields = [
+            "profile",
+            "has_address",
+            "has_phone",
+            "has_email_1",
+            "has_email_2",
+            "has_dni",
+            "has_url",
+            "has_biography",
+            "has_open_to_work",
+            "has_vehicle",
+            "has_disability",
+            "has_disability_percentage",
+            "has_incorporation",
+            "has_sector",
+            "has_work_experiences",
+            "has_hard_skills",
+            "has_soft_skills",
+            "has_languages",
+            "has_academic_educations",
+            "has_volunteerings",
+            "has_projects",
+            "has_publications",
+            "has_recognitions_awards",
+            "has_certifications_courses",
+        ]
