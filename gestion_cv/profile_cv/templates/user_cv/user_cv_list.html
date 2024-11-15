@@ -9,15 +9,35 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
+                <th>Username</th>
                 <th>Address</th>
+                <th>Phone</th>
+                <th>Email 1</th>
+                <th>Email 2</th>
+                <th>DNI</th>
+                <th>URL</th>
+                <th>Biography</th>
+                <th>Open to Work</th>
+                <th>Vehicle</th>
+                <th>Disability</th>
+                <th>Disability Percentage</th>
+                <th>Incorporation</th>
+                <th>Sector</th>
+                <th>Work Experiences</th>
+                <th>Hard Skills</th>
+                <th>Soft Skills</th>
+                <th>Languages</th>
+                <th>Academic Educations</th>
+                <th>Volunteerings</th>
+                <th>Projects</th>
+                <th>Publications</th>
+                <th>Recognitions & Awards</th>
+                <th>Certifications & Courses</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            {% for user_cv in user_cvs %}
+            {% for user_cv in user_cv %}
             <tr>
                 <td>{{ user_cv.profile.user.username }}</td>
                 <td>{{ user_cv.has_address }}</td>
@@ -50,7 +70,7 @@
             </tr>
             {% empty %}
             <tr>
-                <td colspan="5">No User CVs found.</td>
+                <td colspan="25">No User CVs found.</td>
             </tr>
             {% endfor %}
         </tbody>
