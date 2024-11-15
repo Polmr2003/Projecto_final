@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         <h1>Confirm Delete Project</h1>
-        <p>Are you sure you want to delete the Project "{{ hardskill.name }}"?</p>
+        <p>Are you sure you want to delete the Project "{{ project.name }}"?</p>
         <form method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Yes, delete</button>

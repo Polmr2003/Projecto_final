@@ -3,12 +3,47 @@ from django.db import models
 # Enums
 class Incorporation(models.TextChoices):
     IMMEDIATELY = 'IMMEDIATELY', 'Immediately'
-    _15_DAYS = '_15_DAYS', '_15_Days'
-    _7_DAYS = '_7_DAYS', '_7_Days'
+    _15_DAYS = '_15_DAYS', '15 Days'
+    _7_DAYS = '_7_DAYS', '7 Days'
 
 class Sector(models.TextChoices):
     IT = 'IT', 'It'
     HEALTH = 'HEALTH', 'Health'
+    OTHER = 'OTHER', 'Other'
+
+class HardSkills(models.TextChoices):
+    PYTHON = 'PYTHON', 'Python'
+    JAVA = 'JAVA', 'Java'
+    JAVASCRIPT = 'JAVASCRIPT', 'JavaScript'
+    C_PLUS_PLUS = 'C_PLUS_PLUS', 'C++'
+    SQL = 'SQL', 'SQL'
+    HTML = 'HTML', 'HTML'
+    CSS = 'CSS', 'CSS'
+    RUBY = 'RUBY', 'Ruby'
+    PHP = 'PHP', 'PHP'
+    SWIFT = 'SWIFT', 'Swift'
+    GO = 'GO', 'Go'
+    KOTLIN = 'KOTLIN', 'Kotlin'
+    R = 'R', 'R'
+    SCALA = 'SCALA', 'Scala'
+    PERL = 'PERL', 'Perl'
+    MATLAB = 'MATLAB', 'MATLAB'
+    VHDL = 'VHDL', 'VHDL'
+    VERILOG = 'VERILOG', 'Verilog'
+    ASSEMBLY = 'ASSEMBLY', 'Assembly'
+    OTHER = 'OTHER', 'Other'
+
+class SoftSkills(models.TextChoices):
+    COMMUNICATION = 'COMMUNICATION', 'Communication'
+    TEAMWORK = 'TEAMWORK', 'Teamwork'
+    PROBLEM_SOLVING = 'PROBLEM_SOLVING', 'Problem Solving'
+    TIME_MANAGEMENT = 'TIME_MANAGEMENT', 'Time Management'
+    ADAPTABILITY = 'ADAPTABILITY', 'Adaptability'
+    CREATIVITY = 'CREATIVITY', 'Creativity'
+    LEADERSHIP = 'LEADERSHIP', 'Leadership'
+    WORK_ETHIC = 'WORK_ETHIC', 'Work Ethic'
+    INTERPERSONAL_SKILLS = 'INTERPERSONAL_SKILLS', 'Interpersonal Skills'
+    CRITICAL_THINKING = 'CRITICAL_THINKING', 'Critical Thinking'
     OTHER = 'OTHER', 'Other'
 
 # Model to represent a user
@@ -31,22 +66,47 @@ class Profile(models.Model):
     vehicle = models.BooleanField(blank=False, null=True)
     disability = models.BooleanField(blank=True, null=True)
     disability_percentage = models.IntegerField(blank=True, null=True)
-    incorporation = models.CharField(max_length=50, choices=Incorporation.choices, blank=True, null=True)  # Incorporation
+    incorporation = models.CharField (max_length=50, choices=Incorporation.choices, blank=True, null=True)  # Incorporation
     sector = models.CharField(max_length=50, choices=Sector.choices, blank=True, null=True)  # Sector
 
-    # Many-to-many relationships with other models
-    work_experiences = models.ManyToManyField("WorkExperience", blank=True)  # Work experiences
-    hard_skills = models.ManyToManyField("HardSkill", blank=True)  # Hard skills
-    soft_skills = models.ManyToManyField("SoftSkill", blank=True)  # Soft skills
-    languages = models.ManyToManyField("Language", blank=True)  # Languages
-
     # One-to-many relationships with other models
+    work_experiences = models.ForeignKey("WorkExperience", on_delete=models.CASCADE)  # Work experiences
+    hard_skills = models.ForeignKey("HardSkill", on_delete=models.CASCADE)  # Hard skills
+    soft_skills = models.ForeignKey("SoftSkill", on_delete=models.CASCADE)  # Soft skills
+    languages = models.ForeignKey("Language", on_delete=models.CASCADE)  # Languages
     academic_educations = models.ForeignKey("AcademicEducation", on_delete=models.CASCADE)  # Academic educations
     volunteerings = models.ForeignKey("Volunteering", on_delete=models.CASCADE, blank=True, null=True)  # Volunteerings
     projects = models.ForeignKey("Project", on_delete=models.CASCADE, blank=True, null=True)  # Projects
     publications = models.ForeignKey("Publication", on_delete=models.CASCADE, blank=True, null=True)  # Publications
     recognitions_awards = models.ForeignKey("RecognitionAward", on_delete=models.CASCADE, blank=True, null=True)  # Recognitions and awards
     certifications_courses = models.ForeignKey("CertificationCourse", on_delete=models.CASCADE, blank=True, null=True)  # Certifications and courses
+
+# Model to represent a user's CV
+class User_cv(models.Model):
+    profile = models.ForeignKey("Profile", on_delete=models.CASCADE, blank=True, null=True)  # One-to-one relationship with the User model
+    has_address =  models.BooleanField(blank=True, null=True)  # User's address
+    has_phone = models.BooleanField(blank=True, null=True)# User's phone number
+    has_email_1 = models.BooleanField(blank=True, null=True) # User's primary email
+    has_email_2 = models.BooleanField(blank=True, null=True) # Optional secondary email
+    has_dni = models.BooleanField(blank=True, null=True)  # Unique DNI of the user
+    has_url = models.BooleanField(blank=True, null=True)  # Optional URL of the user
+    has_biography = models.BooleanField(blank=True, null=True)  # Optional biography of the user
+    has_open_to_work = models.BooleanField(blank=True, null=True)
+    has_vehicle = models.BooleanField(blank=False, null=True)
+    has_disability = models.BooleanField(blank=True, null=True)
+    has_disability_percentage = models.BooleanField(blank=True, null=True)
+    has_incorporation = models.BooleanField(blank=True, null=True)  # Incorporation
+    has_sector = models.BooleanField(blank=True, null=True)  # Sector
+    has_work_experiences = models.BooleanField(blank=True, null=True)
+    has_hard_skills = models.BooleanField(blank=True, null=True)
+    has_soft_skills = models.BooleanField(blank=True, null=True)
+    has_languages = models.BooleanField(blank=True, null=True)
+    has_academic_educations = models.BooleanField(blank=True, null=True)
+    has_volunteerings = models.BooleanField(blank=True, null=True)
+    has_projects = models.BooleanField(blank=True, null=True)
+    has_publications = models.BooleanField(blank=True, null=True)
+    has_recognitions_awards = models.BooleanField(blank=True, null=True)
+    has_certifications_courses = models.BooleanField(blank=True, null=True)
 
 # Model to represent a work experience
 class WorkExperience(models.Model):
@@ -70,12 +130,12 @@ class AcademicEducation(models.Model):
 
 # Model to represent a hard skill
 class HardSkill(models.Model):
-    name = models.CharField(max_length=255)  # Name of the skill
+    name = models.CharField(max_length=50, choices=HardSkills.choices, blank=True, null=True)  # Name of the skill
     description = models.TextField(blank=True, null=True)  # Optional description
 
 # Model to represent a soft skill
 class SoftSkill(models.Model):
-    name = models.CharField(max_length=255)  # Name of the skill
+    name = models.CharField(max_length=50, choices=SoftSkills.choices, blank=True, null=True)  # Name of the skill
     description = models.TextField(blank=True, null=True)  # Optional description
 
 # Model to represent a language

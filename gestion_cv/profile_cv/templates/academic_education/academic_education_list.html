@@ -25,6 +25,10 @@
                 <td>{{ education.end_date }}</td>
                 <td>{{ education.current_education }}</td>
                 <td>{{ education.references }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{% url 'academic_education_update' education.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'academic_education_delete' education.pk %}">Delete</a>
+                </td>
             </tr>
             {% empty %}
             <tr>
