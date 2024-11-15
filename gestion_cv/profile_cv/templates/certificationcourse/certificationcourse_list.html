@@ -25,8 +25,8 @@
                 <td>{{ certificationCourse.end_date }}</td>
                 <td>{{ certificationCourse.current_course }}</td>
                 <td>
-                    <a class="btn btn-warning" href="{% url 'certificationCourse_update' certificationCourse.pk %}">Edit</a>
-                    <a class="btn btn-danger" href="{% url 'certificationCourse_delete' certificationCourse.pk %}">Delete</a>
+                    <a class="btn btn-warning" href="{% url 'certification_course_update' certificationCourse.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'certification_course_delete' certificationCourse.pk %}">Delete</a>
                 </td>
             </tr>
             {% empty %}

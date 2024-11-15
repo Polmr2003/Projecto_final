@@ -3,11 +3,11 @@
 {% block content %}
     <div class="container">
         <h1>Confirm Delete Publication</h1>
-        <p>Are you sure you want to delete the Publication "{{ hardskill.name }}"?</p>
+        <p>Are you sure you want to delete the Publication "{{ publication.name }}"?</p>
         <form method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Yes, delete</button>
-            <a href="{% url 'hardskill_list' %}" class="btn btn-secondary">Cancel</a>
+            <a href="{% url 'publication_list' %}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </body>

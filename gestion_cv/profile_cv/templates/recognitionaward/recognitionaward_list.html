@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Publication List{% endblock %}
+{% block title %}Recognition Award List{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Publication list</h2>
+    <h2>Recognition Award list</h2>
 
     <table class="table table-striped">
         <thead>
@@ -12,18 +12,19 @@
                 <th>name</th>
                 <th>entity</th>
                 <th>description</th>
+                
             </tr>
         </thead>
         <tbody>
-            {% for publication in publications %}
+            {% for recognitionAward in recognitions_awards %}
             <tr>
-                <td>{{ RecognitionAward.name }}</td>
-                <td>{{ RecognitionAward.entity }}</td>
-                <td>{{ RecognitionAward.description }}</td>
+                <td>{{ recognitionAward.name }}</td>
+                <td>{{ recognitionAward.entity }}</td>
+                <td>{{ recognitionAward.description }}</td>
                
                 <td>
-                    <a class="btn btn-warning" href="{% url 'publication_update' publication.pk %}">Edit</a>
-                    <a class="btn btn-danger" href="{% url 'publication_delete' publication.pk %}">Delete</a>
+                    <a class="btn btn-warning" href="{% url 'recognition_award_update' recognitionAward.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'recognition_award_delete' recognitionAward.pk %}">Delete</a>
                 </td>
             </tr>
             {% empty %}

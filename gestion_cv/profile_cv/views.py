@@ -386,30 +386,30 @@ def recognition_award_create(request):
         form = RecognitionForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("recognitionaward_list")
+            return redirect("recognition_award_list")
     else:
         form = RecognitionForm()
     return render(request, "recognitionaward/recognitionaward_form.html", {"form": form})
 
 #? Función para actualizar un reconocimiento o premio
-def recognition_award_update(request, recognitionaward_id):
-    recognitionaward = get_object_or_404(RecognitionAward, id=recognitionaward_id)
+def recognition_award_update(request, recognition_award_id):
+    recognitionaward = get_object_or_404(RecognitionAward, id=recognition_award_id)
     if request.method == "POST":
         form = RecognitionForm(request.POST, instance=recognitionaward)
         if form.is_valid():
             form.save()
-            return redirect("recognitionaward_list")
+            return redirect("recognition_award_list")
     else:
         form = RecognitionForm(instance=recognitionaward)
     return render(request, "recognitionaward/recognitionaward_form.html", {"form": form})
 
 #? Función para eliminar un reconocimiento o premio
-def recognition_award_delete(request, recognitionaward_id):
-    recognitionaward = get_object_or_404(RecognitionAward, id=recognitionaward_id)
+def recognition_award_delete(request, recognition_award_id):
+    recognitionaward = get_object_or_404(RecognitionAward, id=recognition_award_id)
     if request.method == "POST":
         recognitionaward.delete()
-        return redirect("recognitionaward_list")
-    return render(request, "recognitionaward/recognitionaward_confirm_delete.html", {"recognitionaward": recognitionaward})
+        return redirect("recognition_award_list")
+    return render(request, "recognitionaward/recognitionaward_confirm_delete.html", {"recognitions_awards": recognitionaward})
 
 # * |--------------------------------------------------------------------------
 # * | Class CertificationCourse
