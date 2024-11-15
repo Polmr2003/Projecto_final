@@ -8,8 +8,7 @@ class Incorporation(models.TextChoices):
 
 class Sector(models.TextChoices):
     IT = 'IT', 'It'
-    HEALTH = 'HEALTH', 'Health'
-    OTHER = 'OTHER', 'Other'
+
 
 class HardSkills(models.TextChoices):
     PYTHON = 'PYTHON', 'Python'
@@ -46,6 +45,23 @@ class SoftSkills(models.TextChoices):
     CRITICAL_THINKING = 'CRITICAL_THINKING', 'Critical Thinking'
     OTHER = 'OTHER', 'Other'
 
+class Category(models.TextChoices):
+    SOFTWARE_DEVELOPMENT = 'SOFTWARE_DEVELOPMENT', 'Software Development'
+    DATA_SCIENCE = 'DATA_SCIENCE', 'Data Science'
+    CYBER_SECURITY = 'CYBER_SECURITY', 'Cyber Security'
+    NETWORK_ENGINEERING = 'NETWORK_ENGINEERING', 'Network Engineering'
+    SYSTEM_ADMINISTRATION = 'SYSTEM_ADMINISTRATION', 'System Administration'
+    CLOUD_COMPUTING = 'CLOUD_COMPUTING', 'Cloud Computing'
+    DEVOPS = 'DEVOPS', 'DevOps'
+    IT_SUPPORT = 'IT_SUPPORT', 'IT Support'
+    DATABASE_ADMINISTRATION = 'DATABASE_ADMINISTRATION', 'Database Administration'
+    ARTIFICIAL_INTELLIGENCE = 'ARTIFICIAL_INTELLIGENCE', 'Artificial Intelligence'
+    MACHINE_LEARNING = 'MACHINE_LEARNING', 'Machine Learning'
+    WEB_DEVELOPMENT = 'WEB_DEVELOPMENT', 'Web Development'
+    MOBILE_DEVELOPMENT = 'MOBILE_DEVELOPMENT', 'Mobile Development'
+    GAME_DEVELOPMENT = 'GAME_DEVELOPMENT', 'Game Development'
+    IT_CONSULTING = 'IT_CONSULTING', 'IT Consulting'
+
 # Model to represent a user
 class User(models.Model):
     username = models.CharField(max_length=150, unique=True)  # Unique username
@@ -68,6 +84,7 @@ class Profile(models.Model):
     disability_percentage = models.IntegerField(blank=True, null=True)
     incorporation = models.CharField (max_length=50, choices=Incorporation.choices, blank=True, null=True)  # Incorporation
     sector = models.CharField(max_length=50, choices=Sector.choices, blank=True, null=True)  # Sector
+    category = models.CharField(max_length=50, choices=Category.choices, blank=True, null=True)  # Category
 
     # One-to-many relationships with other models
     work_experiences = models.ForeignKey("WorkExperience", on_delete=models.CASCADE)  # Work experiences
@@ -97,6 +114,7 @@ class User_cv(models.Model):
     has_disability_percentage = models.BooleanField(blank=True, null=True)
     has_incorporation = models.BooleanField(blank=True, null=True)  # Incorporation
     has_sector = models.BooleanField(blank=True, null=True)  # Sector
+    has_category = models.BooleanField(blank=True, null=True)  # Category
     has_work_experiences = models.BooleanField(blank=True, null=True)
     has_hard_skills = models.BooleanField(blank=True, null=True)
     has_soft_skills = models.BooleanField(blank=True, null=True)
