@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Delete User CV{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Confirm Delete User CV</h1>
+        <p>Are you sure you want to delete the User CV "{{ user_cv.name }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, delete</button>
+            <a href="{% url 'user_cv_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

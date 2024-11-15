@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}User CV{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>User CV</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user_cv in user_cvs %}
+            <tr>
+                <td>{{ user_cv.profile.user.username }}</td>
+                <td>{{ user_cv.has_address }}</td>
+                <td>{{ user_cv.has_phone }}</td>
+                <td>{{ user_cv.has_email_1 }}</td>
+                <td>{{ user_cv.has_email_2 }}</td>
+                <td>{{ user_cv.has_dni }}</td>
+                <td>{{ user_cv.has_url }}</td>
+                <td>{{ user_cv.has_biography }}</td>
+                <td>{{ user_cv.has_open_to_work }}</td>
+                <td>{{ user_cv.has_vehicle }}</td>
+                <td>{{ user_cv.has_disability }}</td>
+                <td>{{ user_cv.has_disability_percentage }}</td>
+                <td>{{ user_cv.has_incorporation }}</td>
+                <td>{{ user_cv.has_sector }}</td>
+                <td>{{ user_cv.has_work_experiences }}</td>
+                <td>{{ user_cv.has_hard_skills }}</td>
+                <td>{{ user_cv.has_soft_skills }}</td>
+                <td>{{ user_cv.has_languages }}</td>
+                <td>{{ user_cv.has_academic_educations }}</td>
+                <td>{{ user_cv.has_volunteerings }}</td>
+                <td>{{ user_cv.has_projects }}</td>
+                <td>{{ user_cv.has_publications }}</td>
+                <td>{{ user_cv.has_recognitions_awards }}</td>
+                <td>{{ user_cv.has_certifications_courses }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{% url 'user_cv_update' user_cv.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'user_cv_delete' user_cv.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No User CVs found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="{% url 'user_cv_create' %}">Add User CV</a>
+</div>
+{% endblock %}
