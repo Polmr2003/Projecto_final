@@ -1,13 +1,6 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Delete Language</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Add/Edit Language{% endblock %}
+{% block content %}
     <div class="container">
         <h1>Confirm Delete Language</h1>
         <p>Are you sure you want to delete this language?</p>
@@ -17,5 +10,4 @@
             <a href="{% url 'language_list' %}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}

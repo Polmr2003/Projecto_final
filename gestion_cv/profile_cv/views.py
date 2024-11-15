@@ -186,29 +186,29 @@ def softskill_create(request):
         form = SoftSkillForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("softskill_list")
+            return redirect("soft_skill_list")
     else:
         form = SoftSkillForm()
     return render(request, "softskill/softskill_form.html", {"form": form})
 
 #? Función para actualizar una SoftSkill
-def softskill_update(request, softskill_id):
-    softskill = get_object_or_404(SoftSkill, id=softskill_id)
+def softskill_update(request, soft_skill_id):
+    softskill = get_object_or_404(SoftSkill, id=soft_skill_id)
     if request.method == "POST":
         form = SoftSkillForm(request.POST, instance=softskill)
         if form.is_valid():
             form.save()
-            return redirect("softskill_list")
+            return redirect("soft_skill_list")
     else:
         form = SoftSkillForm(instance=softskill)
     return render(request, "softskill/softskill_form.html", {"form": form})
 
 #? Función para eliminar una SoftSkill
-def softskill_delete(request, softskill_id):
-    softskill = get_object_or_404(SoftSkill, id=softskill_id)
+def softskill_delete(request, soft_skill_id):
+    softskill = get_object_or_404(SoftSkill, id=soft_skill_id)
     if request.method == "POST":
         softskill.delete()
-        return redirect("softskill_list")
+        return redirect("soft_skill_list")
     return render(request, "softskill/softskill_confirm_delete.html", {"softskill": softskill})
 
 # * |--------------------------------------------------------------------------
@@ -226,7 +226,7 @@ def hardskill_create(request):
         form = HardSkillForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("hardskill/hardskill_list")
+            return redirect("hard_skill_list")
     else:
         form = HardSkillForm()
     return render(request, "hardskill/hardskill_form.html", {"form": form})
@@ -238,7 +238,7 @@ def hardskill_update(request, hardskill_id):
         form = HardSkillForm(request.POST, instance=hardskill)
         if form.is_valid():
             form.save()
-            return redirect("hardskill_list")
+            return redirect("hard_skill_list")
     else:
         form = HardSkillForm(instance=hardskill)
     return render(request, "hardskill/hardskill_form.html", {"form": form})
