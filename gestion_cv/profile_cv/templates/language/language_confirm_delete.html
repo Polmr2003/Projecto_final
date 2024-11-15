@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         <h1>Confirm Delete Language</h1>
-        <p>Are you sure you want to delete this language?</p>
+        <p>Are you sure you want to delete this language "{{ language.name }}"?</p>
         <form method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Confirm</button>

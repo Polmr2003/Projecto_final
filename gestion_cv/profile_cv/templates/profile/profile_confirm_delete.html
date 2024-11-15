@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         <h1>Confirm Delete Profile</h1>
-        <p>Are you sure you want to delete the Profile "{{ profile.user }}"?</p>
+        <p>Are you sure you want to delete the Profile "{{ profile.user.username }}"?</p>
         <form method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Yes, delete</button>
