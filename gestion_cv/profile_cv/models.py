@@ -1,72 +1,14 @@
 from django.db import models
-
-# Enums
-class Incorporation(models.TextChoices):
-    IMMEDIATELY = 'IMMEDIATELY', 'Immediately'
-    _15_DAYS = '_15_DAYS', '15 Days'
-    _7_DAYS = '_7_DAYS', '7 Days'
-
-class Sector(models.TextChoices):
-    IT = 'IT', 'It'
-
-
-class HardSkills(models.TextChoices):
-    PYTHON = 'PYTHON', 'Python'
-    JAVA = 'JAVA', 'Java'
-    JAVASCRIPT = 'JAVASCRIPT', 'JavaScript'
-    C_PLUS_PLUS = 'C_PLUS_PLUS', 'C++'
-    SQL = 'SQL', 'SQL'
-    HTML = 'HTML', 'HTML'
-    CSS = 'CSS', 'CSS'
-    RUBY = 'RUBY', 'Ruby'
-    PHP = 'PHP', 'PHP'
-    SWIFT = 'SWIFT', 'Swift'
-    GO = 'GO', 'Go'
-    KOTLIN = 'KOTLIN', 'Kotlin'
-    R = 'R', 'R'
-    SCALA = 'SCALA', 'Scala'
-    PERL = 'PERL', 'Perl'
-    MATLAB = 'MATLAB', 'MATLAB'
-    VHDL = 'VHDL', 'VHDL'
-    VERILOG = 'VERILOG', 'Verilog'
-    ASSEMBLY = 'ASSEMBLY', 'Assembly'
-    OTHER = 'OTHER', 'Other'
-
-class SoftSkills(models.TextChoices):
-    COMMUNICATION = 'COMMUNICATION', 'Communication'
-    TEAMWORK = 'TEAMWORK', 'Teamwork'
-    PROBLEM_SOLVING = 'PROBLEM_SOLVING', 'Problem Solving'
-    TIME_MANAGEMENT = 'TIME_MANAGEMENT', 'Time Management'
-    ADAPTABILITY = 'ADAPTABILITY', 'Adaptability'
-    CREATIVITY = 'CREATIVITY', 'Creativity'
-    LEADERSHIP = 'LEADERSHIP', 'Leadership'
-    WORK_ETHIC = 'WORK_ETHIC', 'Work Ethic'
-    INTERPERSONAL_SKILLS = 'INTERPERSONAL_SKILLS', 'Interpersonal Skills'
-    CRITICAL_THINKING = 'CRITICAL_THINKING', 'Critical Thinking'
-    OTHER = 'OTHER', 'Other'
-
-class Category(models.TextChoices):
-    SOFTWARE_DEVELOPMENT = 'SOFTWARE_DEVELOPMENT', 'Software Development'
-    DATA_SCIENCE = 'DATA_SCIENCE', 'Data Science'
-    CYBER_SECURITY = 'CYBER_SECURITY', 'Cyber Security'
-    NETWORK_ENGINEERING = 'NETWORK_ENGINEERING', 'Network Engineering'
-    SYSTEM_ADMINISTRATION = 'SYSTEM_ADMINISTRATION', 'System Administration'
-    CLOUD_COMPUTING = 'CLOUD_COMPUTING', 'Cloud Computing'
-    DEVOPS = 'DEVOPS', 'DevOps'
-    IT_SUPPORT = 'IT_SUPPORT', 'IT Support'
-    DATABASE_ADMINISTRATION = 'DATABASE_ADMINISTRATION', 'Database Administration'
-    ARTIFICIAL_INTELLIGENCE = 'ARTIFICIAL_INTELLIGENCE', 'Artificial Intelligence'
-    MACHINE_LEARNING = 'MACHINE_LEARNING', 'Machine Learning'
-    WEB_DEVELOPMENT = 'WEB_DEVELOPMENT', 'Web Development'
-    MOBILE_DEVELOPMENT = 'MOBILE_DEVELOPMENT', 'Mobile Development'
-    GAME_DEVELOPMENT = 'GAME_DEVELOPMENT', 'Game Development'
-    IT_CONSULTING = 'IT_CONSULTING', 'IT Consulting'
+from .forms import HardSkills, SoftSkills, Sector, Category, Incorporation
 
 # Model to represent a user
 class User(models.Model):
     username = models.CharField(max_length=150, unique=True)  # Unique username
     password = models.CharField(max_length=128)  # User password
     name = models.CharField(max_length=255)  # Full name of the user
+
+    def __str__(self):
+        return self.username
 
 # Model to represent a user's profile
 class Profile(models.Model):
@@ -98,6 +40,9 @@ class Profile(models.Model):
     recognitions_awards = models.ForeignKey("RecognitionAward", on_delete=models.CASCADE, blank=True, null=True)  # Recognitions and awards
     certifications_courses = models.ForeignKey("CertificationCourse", on_delete=models.CASCADE, blank=True, null=True)  # Certifications and courses
 
+    def __str__(self):
+        return self.user
+
 # Model to represent a user's CV
 class User_cv(models.Model):
     profile = models.ForeignKey("Profile", on_delete=models.CASCADE, blank=True, null=True)  # One-to-one relationship with the User model
@@ -126,6 +71,9 @@ class User_cv(models.Model):
     has_recognitions_awards = models.BooleanField(blank=True, null=True)
     has_certifications_courses = models.BooleanField(blank=True, null=True)
 
+    def __str__(self):
+        return self.profile
+
 # Model to represent a work experience
 class WorkExperience(models.Model):
     job_title = models.CharField(max_length=255)  # Job title
@@ -137,6 +85,9 @@ class WorkExperience(models.Model):
     achievements = models.TextField(blank=True, null=True)  # Optional achievements
     references = models.TextField(blank=True, null=True)  # Optional references
 
+    def __str__(self):
+        return self.job_title
+
 # Model to represent an academic education
 class AcademicEducation(models.Model):
     title = models.CharField(max_length=255)  # Title of the education
@@ -146,15 +97,24 @@ class AcademicEducation(models.Model):
     current_education = models.BooleanField(blank=True, null=True)  # Current education
     references = models.TextField(blank=True, null=True)  # Optional references
 
+    def __str__(self):
+        return self.title
+
 # Model to represent a hard skill
 class HardSkill(models.Model):
     name = models.CharField(max_length=50, choices=HardSkills.choices, blank=True, null=True)  # Name of the skill
     description = models.TextField(blank=True, null=True)  # Optional description
 
+    def __str__(self):
+        return self.name
+
 # Model to represent a soft skill
 class SoftSkill(models.Model):
     name = models.CharField(max_length=50, choices=SoftSkills.choices, blank=True, null=True)  # Name of the skill
     description = models.TextField(blank=True, null=True)  # Optional description
+
+    def __str__(self):
+        return self.name
 
 # Model to represent a language
 class Language(models.Model):
@@ -162,6 +122,8 @@ class Language(models.Model):
     level = models.CharField(max_length=50)  # Proficiency level of the language
     certifications = models.TextField(blank=True, null=True)  # Optional certifications
 
+    def __str__(self):
+        return self.name
 # Model to represent a volunteering
 class Volunteering(models.Model):
     volunteering_position = models.CharField(max_length=255)  # Volunteering position
@@ -173,11 +135,17 @@ class Volunteering(models.Model):
     achievements = models.TextField(blank=True, null=True)  # Optional achievements
     references = models.TextField(blank=True, null=True)  # Optional references
 
+    def __str__(self):
+        return self.volunteering_position
+
 # Model to represent a project
 class Project(models.Model):
     name = models.CharField(max_length=255)  # Name of the project
     description = models.TextField()  # Description of the project
     link = models.URLField(blank=True, null=True)  # Optional link to the project
+
+    def __str__(self):
+        return self.name
 
 # Model to represent a publication
 class Publication(models.Model):
@@ -186,11 +154,17 @@ class Publication(models.Model):
     role = models.CharField(max_length=255)  # Role in the publication
     name = models.CharField(max_length=255)  # Name of the publication
 
+    def __str__(self):
+        return self.doi
+
 # Model to represent a recognition or award
 class RecognitionAward(models.Model):
     name = models.CharField(max_length=255)  # Name of the recognition or award
     entity = models.CharField(max_length=255)  # Entity that grants the recognition or award
     description = models.TextField(blank=True, null=True)  # Optional description
+
+    def __str__(self):
+        return self.name
 
 # Model to represent a certification or course
 class CertificationCourse(models.Model):
@@ -199,3 +173,6 @@ class CertificationCourse(models.Model):
     start_date = models.DateField()  # Start date
     end_date = models.DateField(blank=True, null=True)  # Optional end date
     current_course = models.BooleanField(blank=True, null=True)  # Current course
+
+    def __str__(self):
+        return self.title

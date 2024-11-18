@@ -1,6 +1,67 @@
 from django import forms
 from .models import *
 
+# Enums
+class Incorporation(models.TextChoices):
+    IMMEDIATELY = 'IMMEDIATELY', 'Immediately'
+    _15_DAYS = '_15_DAYS', '15 Days'
+    _7_DAYS = '_7_DAYS', '7 Days'
+
+class Sector(models.TextChoices):
+    IT = 'IT', 'It'
+
+class HardSkills(models.TextChoices):
+    PYTHON = 'PYTHON', 'Python'
+    JAVA = 'JAVA', 'Java'
+    JAVASCRIPT = 'JAVASCRIPT', 'JavaScript'
+    C_PLUS_PLUS = 'C_PLUS_PLUS', 'C++'
+    SQL = 'SQL', 'SQL'
+    HTML = 'HTML', 'HTML'
+    CSS = 'CSS', 'CSS'
+    RUBY = 'RUBY', 'Ruby'
+    PHP = 'PHP', 'PHP'
+    SWIFT = 'SWIFT', 'Swift'
+    GO = 'GO', 'Go'
+    KOTLIN = 'KOTLIN', 'Kotlin'
+    R = 'R', 'R'
+    SCALA = 'SCALA', 'Scala'
+    PERL = 'PERL', 'Perl'
+    MATLAB = 'MATLAB', 'MATLAB'
+    VHDL = 'VHDL', 'VHDL'
+    VERILOG = 'VERILOG', 'Verilog'
+    ASSEMBLY = 'ASSEMBLY', 'Assembly'
+    OTHER = 'OTHER', 'Other'
+
+class SoftSkills(models.TextChoices):
+    COMMUNICATION = 'COMMUNICATION', 'Communication'
+    TEAMWORK = 'TEAMWORK', 'Teamwork'
+    PROBLEM_SOLVING = 'PROBLEM_SOLVING', 'Problem Solving'
+    TIME_MANAGEMENT = 'TIME_MANAGEMENT', 'Time Management'
+    ADAPTABILITY = 'ADAPTABILITY', 'Adaptability'
+    CREATIVITY = 'CREATIVITY', 'Creativity'
+    LEADERSHIP = 'LEADERSHIP', 'Leadership'
+    WORK_ETHIC = 'WORK_ETHIC', 'Work Ethic'
+    INTERPERSONAL_SKILLS = 'INTERPERSONAL_SKILLS', 'Interpersonal Skills'
+    CRITICAL_THINKING = 'CRITICAL_THINKING', 'Critical Thinking'
+    OTHER = 'OTHER', 'Other'
+
+class Category(models.TextChoices):
+    SOFTWARE_DEVELOPMENT = 'SOFTWARE_DEVELOPMENT', 'Software Development'
+    DATA_SCIENCE = 'DATA_SCIENCE', 'Data Science'
+    CYBER_SECURITY = 'CYBER_SECURITY', 'Cyber Security'
+    NETWORK_ENGINEERING = 'NETWORK_ENGINEERING', 'Network Engineering'
+    SYSTEM_ADMINISTRATION = 'SYSTEM_ADMINISTRATION', 'System Administration'
+    CLOUD_COMPUTING = 'CLOUD_COMPUTING', 'Cloud Computing'
+    DEVOPS = 'DEVOPS', 'DevOps'
+    IT_SUPPORT = 'IT_SUPPORT', 'IT Support'
+    DATABASE_ADMINISTRATION = 'DATABASE_ADMINISTRATION', 'Database Administration'
+    ARTIFICIAL_INTELLIGENCE = 'ARTIFICIAL_INTELLIGENCE', 'Artificial Intelligence'
+    MACHINE_LEARNING = 'MACHINE_LEARNING', 'Machine Learning'
+    WEB_DEVELOPMENT = 'WEB_DEVELOPMENT', 'Web Development'
+    MOBILE_DEVELOPMENT = 'MOBILE_DEVELOPMENT', 'Mobile Development'
+    GAME_DEVELOPMENT = 'GAME_DEVELOPMENT', 'Game Development'
+    IT_CONSULTING = 'IT_CONSULTING', 'IT Consulting'
+
 # Form to represent a profile
 class ProfileForm(forms.ModelForm):
     class Meta:
