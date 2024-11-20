@@ -18,9 +18,9 @@ class Profile_CV(models.Model):
     disability_percentage = models.IntegerField(blank=True, null=True)
 
     # One-to-many relationships with other models
-    incorporation = models.ForeignKey("Incorporation", on_delete=models.CASCADE)
-    sector = models.ForeignKey("Sector", on_delete=models.CASCADE)  # Sector
-    category = models.ForeignKey("Category", on_delete=models.CASCADE)  # Category
+    incorporation = models.ForeignKey("IncorporationUser", on_delete=models.CASCADE)
+    sector = models.ForeignKey("SectorUser", on_delete=models.CASCADE)  # Sector
+    category = models.ForeignKey("CategoryUser", on_delete=models.CASCADE)  # Category
     work_experiences = models.ForeignKey("WorkExperience", on_delete=models.CASCADE)  # Work experiences
     hard_skills = models.ForeignKey("HardSkillUser", on_delete=models.CASCADE)  # Hard skills
     soft_skills = models.ForeignKey("SoftSkillUser", on_delete=models.CASCADE)  # Soft skills
@@ -122,6 +122,28 @@ class LanguageUser(models.Model):
 
     def __str__(self):
         return self.name
+
+# Model to represent a Category
+class CategoryUser(models.Model):
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)  # Name of the category
+
+    def __str__(self):
+        return self.category
+
+# Model to represent a Sector
+class SectorUser(models.Model):
+    sector = models.ForeignKey("Sector", on_delete=models.CASCADE)  # Name of the sector
+
+    def __str__(self):
+        return self.sector
+
+# Model to represent a Incorporation
+class IncorporationUser(models.Model):
+    incorporation = models.ForeignKey("Incorporation", on_delete=models.CASCADE)  # Name of the incorporation
+
+    def __str__(self):
+        return self.incorporation
+
 
 # Model to represent a volunteering
 class Volunteering(models.Model):
