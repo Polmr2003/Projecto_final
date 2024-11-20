@@ -1,98 +1,30 @@
 from django.db import models
-
-# Enums
-class Incorporation(models.TextChoices):
-    IMMEDIATELY = 'IMMEDIATELY', 'Immediately'
-    _15_DAYS = '_15_DAYS', '15 Days'
-    _7_DAYS = '_7_DAYS', '7 Days'
-
-class Sector(models.TextChoices):
-    IT = 'IT', 'It'
-
-class HardSkills(models.TextChoices):
-    PYTHON = 'PYTHON', 'Python'
-    JAVA = 'JAVA', 'Java'
-    JAVASCRIPT = 'JAVASCRIPT', 'JavaScript'
-    C_PLUS_PLUS = 'C_PLUS_PLUS', 'C++'
-    SQL = 'SQL', 'SQL'
-    HTML = 'HTML', 'HTML'
-    CSS = 'CSS', 'CSS'
-    RUBY = 'RUBY', 'Ruby'
-    PHP = 'PHP', 'PHP'
-    SWIFT = 'SWIFT', 'Swift'
-    GO = 'GO', 'Go'
-    KOTLIN = 'KOTLIN', 'Kotlin'
-    R = 'R', 'R'
-    SCALA = 'SCALA', 'Scala'
-    PERL = 'PERL', 'Perl'
-    MATLAB = 'MATLAB', 'MATLAB'
-    VHDL = 'VHDL', 'VHDL'
-    VERILOG = 'VERILOG', 'Verilog'
-    ASSEMBLY = 'ASSEMBLY', 'Assembly'
-    OTHER = 'OTHER', 'Other'
-
-class SoftSkills(models.TextChoices):
-    COMMUNICATION = 'COMMUNICATION', 'Communication'
-    TEAMWORK = 'TEAMWORK', 'Teamwork'
-    PROBLEM_SOLVING = 'PROBLEM_SOLVING', 'Problem Solving'
-    TIME_MANAGEMENT = 'TIME_MANAGEMENT', 'Time Management'
-    ADAPTABILITY = 'ADAPTABILITY', 'Adaptability'
-    CREATIVITY = 'CREATIVITY', 'Creativity'
-    LEADERSHIP = 'LEADERSHIP', 'Leadership'
-    WORK_ETHIC = 'WORK_ETHIC', 'Work Ethic'
-    INTERPERSONAL_SKILLS = 'INTERPERSONAL_SKILLS', 'Interpersonal Skills'
-    CRITICAL_THINKING = 'CRITICAL_THINKING', 'Critical Thinking'
-    OTHER = 'OTHER', 'Other'
-
-class Category(models.TextChoices):
-    SOFTWARE_DEVELOPMENT = 'SOFTWARE_DEVELOPMENT', 'Software Development'
-    DATA_SCIENCE = 'DATA_SCIENCE', 'Data Science'
-    CYBER_SECURITY = 'CYBER_SECURITY', 'Cyber Security'
-    NETWORK_ENGINEERING = 'NETWORK_ENGINEERING', 'Network Engineering'
-    SYSTEM_ADMINISTRATION = 'SYSTEM_ADMINISTRATION', 'System Administration'
-    CLOUD_COMPUTING = 'CLOUD_COMPUTING', 'Cloud Computing'
-    DEVOPS = 'DEVOPS', 'DevOps'
-    IT_SUPPORT = 'IT_SUPPORT', 'IT Support'
-    DATABASE_ADMINISTRATION = 'DATABASE_ADMINISTRATION', 'Database Administration'
-    ARTIFICIAL_INTELLIGENCE = 'ARTIFICIAL_INTELLIGENCE', 'Artificial Intelligence'
-    MACHINE_LEARNING = 'MACHINE_LEARNING', 'Machine Learning'
-    WEB_DEVELOPMENT = 'WEB_DEVELOPMENT', 'Web Development'
-    MOBILE_DEVELOPMENT = 'MOBILE_DEVELOPMENT', 'Mobile Development'
-    GAME_DEVELOPMENT = 'GAME_DEVELOPMENT', 'Game Development'
-    IT_CONSULTING = 'IT_CONSULTING', 'IT Consulting'
-
-# Model to represent a user
-class User(models.Model):
-    username = models.CharField(max_length=150, unique=True)  # Unique username
-    password = models.CharField(max_length=128)  # User password
-    name = models.CharField(max_length=255)  # Full name of the user
-
-    def __str__(self):
-        return self.username
+from django.contrib.auth.models import User
 
 # Model to represent a user's profile
-class Profile(models.Model):
+class Profile_CV(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # One-to-one relationship with the User model
+    img_profile = models.ImageField(upload_to='profile_images/')  # Profile picture
     address = models.CharField(max_length=255)  # User's address
     phone = models.CharField(max_length=20)  # User's phone number
+    phone_2 = models.CharField(max_length=20)  # User's phone number
     email_1 = models.EmailField()  # User's primary email
     email_2 = models.EmailField(blank=True, null=True)  # Optional secondary email
     dni = models.CharField(max_length=20, unique=True)  # Unique DNI of the user
-    url = models.URLField(blank=True, null=True)  # Optional URL of the user
     biography = models.TextField(blank=True, null=True)  # Optional biography of the user
-    open_to_work = models.BooleanField(blank=True, null=True) 
+    open_to_work = models.BooleanField(blank=True, null=True)
     vehicle = models.BooleanField(blank=False, null=True)
     disability = models.BooleanField(blank=True, null=True)
     disability_percentage = models.IntegerField(blank=True, null=True)
-    incorporation = models.CharField (max_length=50, choices=Incorporation.choices, blank=True, null=True)  # Incorporation
-    sector = models.CharField(max_length=50, choices=Sector.choices, blank=True, null=True)  # Sector
-    category = models.CharField(max_length=50, choices=Category.choices, blank=True, null=True)  # Category
 
     # One-to-many relationships with other models
+    incorporation = models.ForeignKey("Incorporation", on_delete=models.CASCADE)
+    sector = models.ForeignKey("Sector", on_delete=models.CASCADE)  # Sector
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)  # Category
     work_experiences = models.ForeignKey("WorkExperience", on_delete=models.CASCADE)  # Work experiences
-    hard_skills = models.ForeignKey("HardSkill", on_delete=models.CASCADE)  # Hard skills
-    soft_skills = models.ForeignKey("SoftSkill", on_delete=models.CASCADE)  # Soft skills
-    languages = models.ForeignKey("Language", on_delete=models.CASCADE)  # Languages
+    hard_skills = models.ForeignKey("HardSkillUser", on_delete=models.CASCADE)  # Hard skills
+    soft_skills = models.ForeignKey("SoftSkillUser", on_delete=models.CASCADE)  # Soft skills
+    languages = models.ForeignKey("LanguageUser", on_delete=models.CASCADE)  # Languages
     academic_educations = models.ForeignKey("AcademicEducation", on_delete=models.CASCADE)  # Academic educations
     volunteerings = models.ForeignKey("Volunteering", on_delete=models.CASCADE, blank=True, null=True)  # Volunteerings
     projects = models.ForeignKey("Project", on_delete=models.CASCADE, blank=True, null=True)  # Projects
@@ -105,9 +37,13 @@ class Profile(models.Model):
 
 # Model to represent a user's CV
 class User_cv(models.Model):
-    profile = models.ForeignKey("Profile", on_delete=models.CASCADE, blank=True, null=True)  # One-to-one relationship with the User model
+    profile_cv = models.ForeignKey("Profile_CV", on_delete=models.CASCADE, blank=True, null=True)  # One-to-one relationship with the User model
+    urlCV = models.URLField(blank=True, null=True)  # Optional URL of the user
+    template = models.CharField(max_length=255)  # Template of the CV
+    has_img_profile = models.BooleanField(blank=True, null=True)  # Profile picture
     has_address =  models.BooleanField(blank=True, null=True)  # User's address
     has_phone = models.BooleanField(blank=True, null=True)# User's phone number
+    has_phone_2 = models.BooleanField(blank=True, null=True)# User's phone number
     has_email_1 = models.BooleanField(blank=True, null=True) # User's primary email
     has_email_2 = models.BooleanField(blank=True, null=True) # Optional secondary email
     has_dni = models.BooleanField(blank=True, null=True)  # Unique DNI of the user
@@ -161,29 +97,32 @@ class AcademicEducation(models.Model):
         return self.title
 
 # Model to represent a hard skill
-class HardSkill(models.Model):
-    name = models.CharField(max_length=50, choices=HardSkills.choices, blank=True, null=True)  # Name of the skill
+class HardSkillUser(models.Model):
+    hard_skill = models.ForeignKey("HardSkill", on_delete=models.CASCADE)  # Name of the skill
     description = models.TextField(blank=True, null=True)  # Optional description
+    level_skill = models.IntegerField(max_length= 5)  # Proficiency level of the skill
 
     def __str__(self):
-        return self.name
+        return self.hardSkill
 
 # Model to represent a soft skill
-class SoftSkill(models.Model):
-    name = models.CharField(max_length=50, choices=SoftSkills.choices, blank=True, null=True)  # Name of the skill
+class SoftSkillUser(models.Model):
+    soft_skill = models.ForeignKey("SoftSkill", on_delete=models.CASCADE)  # Name of the skill
     description = models.TextField(blank=True, null=True)  # Optional description
+    level_skill = models.IntegerField(max_length= 5)  # Proficiency level of the skill
 
     def __str__(self):
-        return self.name
+        return self.softSkill
 
 # Model to represent a language
-class Language(models.Model):
-    name = models.CharField(max_length=100)  # Name of the language
+class LanguageUser(models.Model):
+    language = models.ForeignKey("Language", on_delete=models.CASCADE)  # Name of the language
     level = models.CharField(max_length=50)  # Proficiency level of the language
     certifications = models.TextField(blank=True, null=True)  # Optional certifications
 
     def __str__(self):
         return self.name
+
 # Model to represent a volunteering
 class Volunteering(models.Model):
     volunteering_position = models.CharField(max_length=255)  # Volunteering position
@@ -236,3 +175,26 @@ class CertificationCourse(models.Model):
 
     def __str__(self):
         return self.title
+
+class HardSkill (models.Model):
+    name_hard_skill = models.CharField(max_length=50)  # Name of the skill
+
+class SoftSkill (models.Model):
+    name_soft_skill = models.CharField(max_length=50)  # Name of the skill
+
+# Model to represent a language
+class Language (models.Model):
+    name_language = models.CharField(max_length=100)  # Name of the language
+
+# model to represent a category
+class Category(models.Model):
+    name_category = models.CharField(max_length=100)  # Name of the category
+
+# model to represent a sector
+class Sector(models.Model):
+    name_sector = models.CharField(max_length=100)  # Name
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)  # Category
+
+# model to represent a incorporation
+class Incorporation(models.Model):
+    name_incorporation = models.CharField(max_length=100)  # Name

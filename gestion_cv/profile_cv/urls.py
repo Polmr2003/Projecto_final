@@ -22,12 +22,6 @@ urlpatterns = [
     # Home URL
     path('', home, name='home'),
 
-    # User URLs
-    path('users/', user_list, name='user_list'),
-    path('users/create/', user_create, name='user_create'),
-    path('users/update/<int:user_id>/', user_update, name='user_update'),
-    path('users/delete/<int:user_id>/', user_delete, name='user_delete'),
-
     # Profile URLs
     path('profiles/', profile_list, name='profile_list'),
     path('profiles/create/', profile_create, name='profile_create'),

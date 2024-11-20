@@ -4,15 +4,16 @@ from .models import *
 # Form to represent a profile
 class ProfileForm(forms.ModelForm):
     class Meta:
-        model = Profile
+        model = Profile_CV
         fields = [
             "user",
+            "img_profile",
             "address",
             "phone",
+            "phone_2",
             "email_1",
             "email_2",
             "dni",
-            "url",
             "biography",
             "open_to_work",
             "vehicle",
@@ -32,12 +33,6 @@ class ProfileForm(forms.ModelForm):
             "recognitions_awards",
             "certifications_courses",
         ]
-
-# Form to represent a user
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ["username", "password", "name"]
 
 # Form to represent a work experience
 class WorkExperienceForm(forms.ModelForm):
@@ -70,20 +65,20 @@ class AcademicEducationForm(forms.ModelForm):
 # Form to represent a hard skill
 class HardSkillForm(forms.ModelForm):
     class Meta:
-        model = HardSkill
-        fields = ["name", "description"]
+        model = HardSkillUser
+        fields = ["hard_skill", "description", "level_skill"]
 
 # Form to represent a soft skill
 class SoftSkillForm(forms.ModelForm):
     class Meta:
-        model = SoftSkill
-        fields = ["name", "description"]
+        model = SoftSkillUser
+        fields = ["soft_skill", "description", "level_skill"]
 
 # Form to represent a language
 class LanguageForm(forms.ModelForm):
     class Meta:
-        model = Language
-        fields = ["name", "level", "certifications"]
+        model = LanguageUser
+        fields = ["language", "level", "certifications"]
 
 # Form to represent a volunteering
 class VolunteeringForm(forms.ModelForm):
@@ -135,7 +130,7 @@ class UserCvForm(forms.ModelForm):
     class Meta:
         model = User_cv
         fields = [
-            "profile",
+            "profile_cv",
             "has_address",
             "has_phone",
             "has_email_1",
