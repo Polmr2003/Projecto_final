@@ -6,7 +6,7 @@ class Profile_CV(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # One-to-one relationship with the User model
     img_profile = models.ImageField(upload_to='profile_images/')  # Profile picture
     address = models.CharField(max_length=255)  # User's address
-    phone = models.CharField(max_length=20)  # User's phone number
+    phone_1 = models.CharField(max_length=20)  # User's phone number
     phone_2 = models.CharField(max_length=20)  # User's phone number
     email_1 = models.EmailField()  # User's primary email
     email_2 = models.EmailField(blank=True, null=True)  # Optional secondary email
@@ -42,7 +42,7 @@ class User_cv(models.Model):
     template = models.CharField(max_length=255)  # Template of the CV
     has_img_profile = models.BooleanField(blank=True, null=True)  # Profile picture
     has_address =  models.BooleanField(blank=True, null=True)  # User's address
-    has_phone = models.BooleanField(blank=True, null=True)# User's phone number
+    has_phone_1 = models.BooleanField(blank=True, null=True)# User's phone number
     has_phone_2 = models.BooleanField(blank=True, null=True)# User's phone number
     has_email_1 = models.BooleanField(blank=True, null=True) # User's primary email
     has_email_2 = models.BooleanField(blank=True, null=True) # Optional secondary email

@@ -9,7 +9,7 @@ class ProfileForm(forms.ModelForm):
             "user",
             "img_profile",
             "address",
-            "phone",
+            "phone_1",
             "phone_2",
             "email_1",
             "email_2",
@@ -131,8 +131,12 @@ class UserCvForm(forms.ModelForm):
         model = User_cv
         fields = [
             "profile_cv",
+            "urlCV",
+            "template",
+            "has_img_profile",
             "has_address",
-            "has_phone",
+            "has_phone_1",
+            "has_phone_2",
             "has_email_1",
             "has_email_2",
             "has_dni",
