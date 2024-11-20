@@ -109,7 +109,6 @@ class HardSkillUser(models.Model):
 class SoftSkillUser(models.Model):
     soft_skill = models.ForeignKey("SoftSkill", on_delete=models.CASCADE)  # Name of the skill
     description = models.TextField(blank=True, null=True)  # Optional description
-    level_skill = models.IntegerField(max_length= 5)  # Proficiency level of the skill
 
     def __str__(self):
         return self.softSkill

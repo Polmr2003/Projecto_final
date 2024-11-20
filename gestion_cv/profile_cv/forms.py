@@ -72,7 +72,7 @@ class HardSkillForm(forms.ModelForm):
 class SoftSkillForm(forms.ModelForm):
     class Meta:
         model = SoftSkillUser
-        fields = ["soft_skill", "description", "level_skill"]
+        fields = ["soft_skill", "description"]
 
 # Form to represent a language
 class LanguageForm(forms.ModelForm):
