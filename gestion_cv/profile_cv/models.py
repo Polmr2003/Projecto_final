@@ -197,25 +197,22 @@ class CertificationCourse(models.Model):
     def __str__(self):
         return self.title
 
+# Models to represent Enums
 class HardSkill (models.Model):
     name_hard_skill = models.CharField(max_length=50)  # Name of the skill
 
 class SoftSkill (models.Model):
     name_soft_skill = models.CharField(max_length=50)  # Name of the skill
 
-# Model to represent a language
 class Language (models.Model):
     name_language = models.CharField(max_length=100)  # Name of the language
 
-# model to represent a category
 class Category(models.Model):
     name_category = models.CharField(max_length=100)  # Name of the category
 
-# model to represent a sector
 class Sector(models.Model):
     name_sector = models.CharField(max_length=100)  # Name
     category = models.ForeignKey("Category", on_delete=models.CASCADE)  # Category
 
-# model to represent a incorporation
 class Incorporation(models.Model):
     name_incorporation = models.CharField(max_length=100)  # Name
