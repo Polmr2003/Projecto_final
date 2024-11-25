@@ -21,5 +21,9 @@
     <p><strong>Experiencias laborales:</strong> {{ profile.work_experiences }}</p>
     <p><strong>Habilidades duras:</strong> {{ profile.hard_skills }}</p>
     <p><strong>Habilidades blandas:</strong> {{ profile.soft_skills }}</p>
+
+    <!-- crear curriculum -->
+    <a class="btn btn-primary" href="{% url 'user_cv_create' %}">Crear curriculum</a>
+
 </div>
 {% endblock %}

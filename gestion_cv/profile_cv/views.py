@@ -220,7 +220,7 @@ def hardskill_delete(request, hard_skill_id):
 
 #? Función para listar los idiomas
 def language_list(request):
-    languages = Language.objects.all()
+    languages = LanguageUser.objects.all()
     return render(request, "language/language_list.html", {"languages": languages})
 
 #? Función para crear un idioma
@@ -236,7 +236,7 @@ def language_create(request):
 
 #? Función para actualizar un idioma
 def language_update(request, language_id):
-    language = get_object_or_404(Language, id=language_id)
+    language = get_object_or_404(LanguageUser, id=language_id)
     if request.method == "POST":
         form = LanguageForm(request.POST, instance=language)
         if form.is_valid():

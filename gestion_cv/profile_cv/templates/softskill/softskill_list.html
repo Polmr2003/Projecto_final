@@ -16,7 +16,7 @@
         <tbody>
             {% for softskill in softskills %}
             <tr>
-                <td>{{ softskill.name }}</td>
+                <td>{{ softskill.soft_skill }}</td>
                 <td>{{ softskill.description }}</td>
                 <td>
                     <a class="btn btn-warning" href="{% url 'soft_skill_update' softskill.pk %}">Edit</a>
