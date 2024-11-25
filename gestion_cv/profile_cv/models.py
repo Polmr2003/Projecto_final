@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 # Model to represent a user's profile
 class Profile_CV(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # One-to-one relationship with the User model
+    img_profile = models.ImageField(upload_to='profile_images/', blank=True)  # Profile picture
     img_1_profile = models.ImageField(upload_to='profile_images/', blank=True)  # Profile picture
     img_2_profile = models.ImageField(upload_to='profile_images/', blank=True)  # Profile picture
     img_3_profile = models.ImageField(upload_to='profile_images/', blank=True)  # Profile picture
