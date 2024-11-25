@@ -7,7 +7,10 @@ class ProfileForm(forms.ModelForm):
         model = Profile_CV
         fields = [
             "user",
-            "img_profile",
+            "img_1_profile",
+            "img_2_profile",
+            "img_3_profile",
+            "img_4_profile",
             "address",
             "phone_1",
             "phone_2",
