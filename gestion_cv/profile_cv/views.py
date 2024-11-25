@@ -17,7 +17,7 @@ def home(request):
 # ? Función para crear un perfil
 def profile_create(request):
     if request.method == "POST":
-        form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect("profile_list")
@@ -34,7 +34,7 @@ def profile_list(request):
 def profile_update(request, profile_id):
     profile = get_object_or_404(Profile_CV, id=profile_id)
     if request.method == "POST":
-        form = ProfileForm(request.POST, instance=profile)
+        form = ProfileForm(request.POST,  request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             return redirect("profile_list")
@@ -49,6 +49,10 @@ def profile_delete(request, profile_id):
         profile.delete()
         return redirect("profile_list")
     return render(request, "profile/profile_confirm_delete.html", {"profile": profile})
+
+def profile_view(request, profile_id):
+    profile = get_object_or_404(Profile_CV, id=profile_id)
+    return render(request, 'profile/profile_view_details.html', {'profile': profile})
 
 # * |--------------------------------------------------------------------------
 # * | Class WorkExperience

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="profile-cv">
+    <h1>Perfil de {{ profile.user.username }}</h1>
+    <img src="{{ profile.img_profile.url }}">
+    <p><strong>Dirección:</strong> {{ profile.address }}</p>
+    <p><strong>Teléfono 1:</strong> {{ profile.phone_1 }}</p>
+    <p><strong>Teléfono 2:</strong> {{ profile.phone_2 }}</p>
+    <p><strong>Email 1:</strong> {{ profile.email_1 }}</p>
+    <p><strong>Email 2:</strong> {{ profile.email_2 }}</p>
+    <p><strong>DNI:</strong> {{ profile.dni }}</p>
+    <p><strong>Biografía:</strong> {{ profile.biography }}</p>
+    <p><strong>Disponible para trabajar:</strong> {{ profile.open_to_work|yesno:"Sí,No" }}</p>
+    <p><strong>Vehículo:</strong> {{ profile.vehicle|yesno:"Sí,No" }}</p>
+    <p><strong>Discapacidad:</strong> {{ profile.disability|yesno:"Sí,No" }}</p>
+    <p><strong>Porcentaje de discapacidad:</strong> {{ profile.disability_percentage }}%</p>
+    <p><strong>Incorporación:</strong> {{ profile.incorporation }}</p>
+    <p><strong>Sector:</strong> {{ profile.sector }}</p>
+    <p><strong>Categoría:</strong> {{ profile.category }}</p>
+    <p><strong>Experiencias laborales:</strong> {{ profile.work_experiences }}</p>
+    <p><strong>Habilidades duras:</strong> {{ profile.hard_skills }}</p>
+    <p><strong>Habilidades blandas:</strong> {{ profile.soft_skills }}</p>
+</div>
+{% endblock %}

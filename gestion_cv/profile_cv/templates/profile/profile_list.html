@@ -69,6 +69,7 @@
                 <td>
                     <a class="btn btn-warning" href="{% url 'profile_update' profile.pk %}">Edit</a>
                     <a class="btn btn-danger" href="{% url 'profile_delete' profile.pk %}">Delete</a>
+                    <a class="btn btn-success" href="{% url 'profile_view' profile.pk %}">Details</a>
                 </td>
             </tr>
             {% empty %}

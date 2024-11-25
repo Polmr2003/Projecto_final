@@ -27,6 +27,7 @@ urlpatterns = [
     path('profiles/create/', profile_create, name='profile_create'),
     path('profiles/update/<int:profile_id>/', profile_update, name='profile_update'),
     path('profiles/delete/<int:profile_id>/', profile_delete, name='profile_delete'),
+    path('profiles/<int:profile_id>/', profile_view, name='profile_view'),
 
     # Work experience URLs
     path('work_experiences/', work_experience_list, name='work_experience_list'),

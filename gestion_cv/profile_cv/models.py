@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Model to represent a user's profile
 class Profile_CV(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # One-to-one relationship with the User model
-    img_profile = models.ImageField(upload_to='profile_images/')  # Profile picture
+    img_profile = models.ImageField(upload_to='profile_images/', blank=True)  # Profile picture
     address = models.CharField(max_length=255)  # User's address
     phone_1 = models.CharField(max_length=20)  # User's phone number
     phone_2 = models.CharField(max_length=20)  # User's phone number
@@ -33,7 +33,7 @@ class Profile_CV(models.Model):
     certifications_courses = models.ForeignKey("CertificationCourse", on_delete=models.CASCADE, blank=True, null=True)  # Certifications and courses
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 # Model to represent a user's CV
 class User_cv(models.Model):
@@ -103,7 +103,7 @@ class HardSkillUser(models.Model):
     level_skill = models.IntegerField(max_length= 5)  # Proficiency level of the skill
 
     def __str__(self):
-        return self.hardSkill
+        return self.hard_skill.name_hard_skill
 
 # Model to represent a soft skill
 class SoftSkillUser(models.Model):
@@ -111,7 +111,7 @@ class SoftSkillUser(models.Model):
     description = models.TextField(blank=True, null=True)  # Optional description
 
     def __str__(self):
-        return self.softSkill
+        return self.soft_skill.name_soft_skill
 
 # Model to represent a language
 class LanguageUser(models.Model):
@@ -120,28 +120,28 @@ class LanguageUser(models.Model):
     certifications = models.TextField(blank=True, null=True)  # Optional certifications
 
     def __str__(self):
-        return self.name
+        return self.language.name_language
 
 # Model to represent a Category
 class CategoryUser(models.Model):
     category = models.ForeignKey("Category", on_delete=models.CASCADE)  # Name of the category
 
     def __str__(self):
-        return self.category
+        return self.category.name_category
 
 # Model to represent a Sector
 class SectorUser(models.Model):
     sector = models.ForeignKey("Sector", on_delete=models.CASCADE)  # Name of the sector
 
     def __str__(self):
-        return self.sector
+        return self.sector.name_sector
 
 # Model to represent a Incorporation
 class IncorporationUser(models.Model):
     incorporation = models.ForeignKey("Incorporation", on_delete=models.CASCADE)  # Name of the incorporation
 
     def __str__(self):
-        return self.incorporation
+        return self.incorporation.name_incorporation
 
 
 # Model to represent a volunteering
@@ -201,18 +201,34 @@ class CertificationCourse(models.Model):
 class HardSkill (models.Model):
     name_hard_skill = models.CharField(max_length=50)  # Name of the skill
 
+    def __str__(self):
+        return self.name_hard_skill
+
 class SoftSkill (models.Model):
     name_soft_skill = models.CharField(max_length=50)  # Name of the skill
 
+    def __str__(self):
+        return self.name_soft_skill
 class Language (models.Model):
     name_language = models.CharField(max_length=100)  # Name of the language
 
+    def __str__(self):
+        return self.name_language
 class Category(models.Model):
     name_category = models.CharField(max_length=100)  # Name of the category
+
+    def __str__(self):
+        return self.name_category
 
 class Sector(models.Model):
     name_sector = models.CharField(max_length=100)  # Name
     category = models.ForeignKey("Category", on_delete=models.CASCADE)  # Category
 
+    def __str__(self):
+        return self.name_sector
+
 class Incorporation(models.Model):
     name_incorporation = models.CharField(max_length=100)  # Name
+
+    def __str__(self):
+        return self.name_incorporation
