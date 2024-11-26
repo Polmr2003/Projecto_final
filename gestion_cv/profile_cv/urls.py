@@ -91,7 +91,7 @@ urlpatterns = [
 
     # User cv URLs
     path('user_cvs/', user_cv_list, name='user_cv_list'),
-    path('user_cvs/create/', user_cv_create, name='user_cv_create'),
+    path('user_cvs/create/<str:username>/', user_cv_create, name='user_cv_create'),
     path('user_cvs/update/<int:user_cv_id>/', user_cv_update, name='user_cv_update'),
     path('user_cvs/delete/<int:user_cv_id>/', user_cv_delete, name='user_cv_delete'),
 

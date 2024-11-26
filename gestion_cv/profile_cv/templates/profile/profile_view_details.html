@@ -23,7 +23,7 @@
     <p><strong>Habilidades blandas:</strong> {{ profile.soft_skills }}</p>
 
     <!-- crear curriculum -->
-    <a class="btn btn-primary" href="{% url 'user_cv_create' %}">Crear curriculum</a>
+    <a class="btn btn-primary" href="{% url 'user_cv_create' profile.user.username %}">Crear curriculum</a>
 
 </div>
 {% endblock %}

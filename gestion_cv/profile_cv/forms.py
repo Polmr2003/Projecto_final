@@ -129,6 +129,14 @@ class CertificationForm(forms.ModelForm):
         ]
 
 #form to represent a user cv
+class ToggleButtonWidget(forms.CheckboxInput):
+    template_name = 'user_cv/button.html'
+
+class ReadOnlyWidget(forms.TextInput):
+    def __init__(self, *args, **kwargs):
+        kwargs['attrs'] = {'readonly': 'readonly'}
+        super().__init__(*args, **kwargs)
+
 class UserCvForm(forms.ModelForm):
     class Meta:
         model = User_cv
@@ -163,3 +171,33 @@ class UserCvForm(forms.ModelForm):
             "has_recognitions_awards",
             "has_certifications_courses",
         ]
+        widgets = {
+            'profile_cv': ReadOnlyWidget(),
+            'urlCV': ReadOnlyWidget(),
+            'has_img_profile': ToggleButtonWidget(),
+            'has_address': ToggleButtonWidget(),
+            'has_phone_1': ToggleButtonWidget(),
+            'has_phone_2': ToggleButtonWidget(),
+            'has_email_1': ToggleButtonWidget(),
+            'has_email_2': ToggleButtonWidget(),
+            'has_dni': ToggleButtonWidget(),
+            'has_url': ToggleButtonWidget(),
+            'has_biography': ToggleButtonWidget(),
+            'has_open_to_work': ToggleButtonWidget(),
+            'has_vehicle': ToggleButtonWidget(),
+            'has_disability': ToggleButtonWidget(),
+            'has_disability_percentage': ToggleButtonWidget(),
+            'has_incorporation': ToggleButtonWidget(),
+            'has_sector': ToggleButtonWidget(),
+            'has_category': ToggleButtonWidget(),
+            'has_work_experiences': ToggleButtonWidget(),
+            'has_hard_skills': ToggleButtonWidget(),
+            'has_soft_skills': ToggleButtonWidget(),
+            'has_languages': ToggleButtonWidget(),
+            'has_academic_educations': ToggleButtonWidget(),
+            'has_volunteerings': ToggleButtonWidget(),
+            'has_projects': ToggleButtonWidget(),
+            'has_publications': ToggleButtonWidget(),
+            'has_recognitions_awards': ToggleButtonWidget(),
+            'has_certifications_courses': ToggleButtonWidget(),
+        }
