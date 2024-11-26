@@ -465,15 +465,18 @@ def user_cv_list(request):
 
 #? Función para crear un CV
 def user_cv_create(request, username):
+    profile_cv = get_object_or_404(Profile_CV, user__username=username)
     if request.method == "POST":
         form = UserCvForm(request.POST)
         if form.is_valid():
-            form.save()
+            user_cv = form.save(commit=False)
+            user_cv.profile_cv = profile_cv # Asigna el nombre del usuario
+            user_cv.save()
             return redirect("user_cv_list")
     else:
         random_numbers = ''.join(random.choices(string.digits, k=4))
-        initial_urlCV = f"{username}-{random_numbers}"
-        form = UserCvForm(initial={'urlCV': initial_urlCV, 'profile_cv': username})
+        initial_urlCV = f"https://{username}-{random_numbers}.com"
+        form = UserCvForm(initial={'urlCV': initial_urlCV})
     return render(request, "user_cv/user_cv_form.html", {"form": form})
 
 #? Función para actualizar un CV
