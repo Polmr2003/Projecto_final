@@ -11,7 +11,8 @@
             <tr>
                 <th>Username</th>
                 <th>Address</th>
-                <th>Phone</th>
+                <th>Phone 1</th>
+                <th>Phone 2</th>
                 <th>Email 1</th>
                 <th>Email 2</th>
                 <th>DNI</th>
@@ -39,9 +40,10 @@
         <tbody>
             {% for user_cv in user_cv %}
             <tr>
-                <td>{{ user_cv.profile.user.username }}</td>
+                <td>{{ user_cv.profile_cv.user.username }}</td>
                 <td>{{ user_cv.has_address }}</td>
-                <td>{{ user_cv.has_phone }}</td>
+                <td>{{ user_cv.has_phone_1 }}</td>
+                <td>{{ user_cv.has_phone_2 }}</td>
                 <td>{{ user_cv.has_email_1 }}</td>
                 <td>{{ user_cv.has_email_2 }}</td>
                 <td>{{ user_cv.has_dni }}</td>

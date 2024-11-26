@@ -470,7 +470,7 @@ def user_cv_create(request, username):
         form = UserCvForm(request.POST)
         if form.is_valid():
             user_cv = form.save(commit=False)
-            user_cv.profile_cv = profile_cv # Asigna el nombre del usuario
+            user_cv.profile_cv = profile_cv  # Asigna el nombre del usuario
             user_cv.save()
             return redirect("user_cv_list")
     else:

@@ -43,7 +43,7 @@ class Profile_CV(models.Model):
 
 # Model to represent a user's CV
 class User_cv(models.Model):
-    profile_cv = models.ForeignKey("Profile_CV", on_delete=models.CASCADE, blank=True, null=True)  # One-to-one relationship with the User model
+    profile_cv = models.ForeignKey(Profile_CV, on_delete=models.CASCADE, blank=True, null=True)  # One-to-one relationship with the User model
     urlCV = models.URLField(unique=True, blank=True, null=True)  # Optional URL of the user
     template = models.CharField(max_length=255)  # Template of the CV
     has_img_profile = models.BooleanField(blank=True, null=True)  # Profile picture
@@ -74,7 +74,7 @@ class User_cv(models.Model):
     has_certifications_courses = models.BooleanField(blank=True, null=True)
 
     def __str__(self):
-        return self.profile
+        return self.profile_cv
 
 # Model to represent a work experience
 class WorkExperience(models.Model):
